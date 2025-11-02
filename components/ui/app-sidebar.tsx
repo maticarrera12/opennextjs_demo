@@ -99,7 +99,7 @@ export default function AppSidebar({
         transition={{ duration: 0.12, ease: "easeInOut" }}
         className={cn(
           "z-40 h-screen border-r bg-card shadow-lg shrink-0",
-          "fixed left-0 top-14 md:relative md:top-0",
+          "fixed left-0 top-14 md:sticky md:top-0",
           "md:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         )}

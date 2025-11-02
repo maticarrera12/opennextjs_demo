@@ -54,20 +54,30 @@ const Hero = () => {
           </div>
 
           {/* Image Section */}
-          <div className="relative w-full max-w-5xl aspect-[4/3] bg-muted rounded-lg flex items-center justify-center">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <p className="text-2xl font-bold text-muted-foreground">
-                {t("imagePlaceholder")}
-              </p>
+          <div className="relative w-full max-w-5xl pt-10">
+            {/* Blur effect behind image - blob effect above image */}
+            <div
+              className="absolute left-1/2 -translate-x-1/2 z-0 bg-gradient-to-b from-primary/40 via-primary/20 to-transparent blur-3xl pointer-events-none rounded-full"
+              style={{
+                width: "100%",
+                height: "400px",
+              }}
+            ></div>
+            <div className="relative aspect-[4/3] bg-muted rounded-lg flex items-center justify-center overflow-hidden z-10">
+              <div className="absolute inset-0 flex items-center justify-center z-10">
+                <p className="text-2xl font-bold text-muted-foreground">
+                  {t("imagePlaceholder")}
+                </p>
+              </div>
+              {/* Uncomment and add your image when ready */}
+              {/* <Image
+                src="/path-to-your-image.jpg"
+                alt="Product showcase"
+                fill
+                className="object-cover rounded-lg"
+                priority
+              /> */}
             </div>
-            {/* Uncomment and add your image when ready */}
-            {/* <Image
-              src="/path-to-your-image.jpg"
-              alt="Product showcase"
-              fill
-              className="object-cover rounded-lg"
-              priority
-            /> */}
           </div>
         </div>
       </div>
