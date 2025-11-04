@@ -1,3 +1,4 @@
+// eslint.config.js
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
@@ -9,8 +10,11 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [
+export default [
+  // Extensiones base de Next + TypeScript
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+
+  // Ignorar rutas
   {
     ignores: [
       "node_modules/**",
@@ -20,6 +24,14 @@ const eslintConfig = [
       "next-env.d.ts",
     ],
   },
-];
 
-export default eslintConfig;
+  // Reglas y plugins personalizados
+  {
+    plugins: ["import", "unused-imports"],
+    rules: {
+      "unused-imports/no-unused-imports": "error",
+      "import/order": ["warn", { alphabetize: { order: "asc" } }],
+      "react/no-unescaped-entities": "off",
+    },
+  },
+];
