@@ -8,6 +8,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { auth } from "@/lib/auth";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import dynamic from "next/dynamic";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -37,6 +38,8 @@ export default async function LocaleLayout({
     headers: await headers(),
   });
 
+   const CrispWithNoSSR = dynamic(() => import("../../components/crisp"));
+
   return (
     <html lang={locale}>
       <body
@@ -48,6 +51,7 @@ export default async function LocaleLayout({
             <Toaster position="top-right" richColors />
             <Analytics />
             <SpeedInsights />
+            <CrispWithNoSSR />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
