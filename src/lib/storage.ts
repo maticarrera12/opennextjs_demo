@@ -35,8 +35,8 @@ export async function uploadImage(
       size: file.size,
     };
   } catch (error) {
-    console.error("Error uploading to Vercel Blob:", error);
-    throw new Error("Failed to upload image to storage");
+    const details = error instanceof Error ? error.message : String(error);
+    throw new Error(`Failed to upload image to storage: ${details}`);
   }
 }
 
@@ -48,8 +48,8 @@ export async function deleteImage(url: string): Promise<void> {
   try {
     await del(url);
   } catch (error) {
-    console.error("Error deleting from Vercel Blob:", error);
-    throw new Error("Failed to delete image from storage");
+    const details = error instanceof Error ? error.message : String(error);
+    throw new Error(`Failed to delete image from storage: ${details}`);
   }
 }
 
@@ -83,7 +83,7 @@ export async function deleteImages(urls: string[]): Promise<void> {
  * Note: Vercel Blob doesn't provide built-in usage tracking,
  * so you'd need to track this in your database
  */
-export async function getUserStorageUsage(userId: string): Promise<number> {
+export async function getUserStorageUsage(_userId: string): Promise<number> {
   // TODO: Implement by querying BrandAsset table
   // and summing fileSize for the user
   return 0;
