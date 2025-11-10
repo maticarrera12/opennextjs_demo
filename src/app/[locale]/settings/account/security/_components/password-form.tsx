@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
@@ -52,111 +51,109 @@ export function PasswordForm() {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{t("title")}</CardTitle>
-        <CardDescription>{t("description")}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(handlePasswordChange)} className="space-y-4">
-            {/* Current Password Field */}
-            <FormField
-              control={form.control}
-              name="currentPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("currentPassword")}</FormLabel>
-                  <FormControl>
+    <section className="space-y-4">
+      <header className="space-y-1">
+        <h3 className="text-base font-semibold text-foreground">{t("title")}</h3>
+        <p className="text-sm text-muted-foreground">{t("description")}</p>
+      </header>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(handlePasswordChange)} className="space-y-4">
+          {/* Current Password Field */}
+          <FormField
+            control={form.control}
+            name="currentPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("currentPassword")}</FormLabel>
+                <FormControl>
+                  <div className="relative">
+                    <Input
+                      type={showCurrentPassword ? "text" : "password"}
+                      placeholder={t("currentPasswordPlaceholder")}
+                      className="pr-10"
+                      {...field}
+                    />
+                    <button
+                      type="button"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                      onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                    >
+                      {showCurrentPassword ? (
+                        <EyeOff className="w-4 h-4" />
+                      ) : (
+                        <Eye className="w-4 h-4" />
+                      )}
+                    </button>
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* New Password Field */}
+          <FormField
+            control={form.control}
+            name="newPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("newPassword")}</FormLabel>
+                <FormControl>
+                  <div className="space-y-0">
                     <div className="relative">
                       <Input
-                        type={showCurrentPassword ? "text" : "password"}
-                        placeholder={t("currentPasswordPlaceholder")}
+                        type={showNewPassword ? "text" : "password"}
+                        placeholder={t("newPasswordPlaceholder")}
                         className="pr-10"
                         {...field}
+                        onFocus={() => setShowPasswordRequirements(true)}
+                        onBlur={() => setShowPasswordRequirements(false)}
                       />
                       <button
                         type="button"
                         className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                        onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                        onClick={() => setShowNewPassword(!showNewPassword)}
                       >
-                        {showCurrentPassword ? (
+                        {showNewPassword ? (
                           <EyeOff className="w-4 h-4" />
                         ) : (
                           <Eye className="w-4 h-4" />
                         )}
                       </button>
                     </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* New Password Field */}
-            <FormField
-              control={form.control}
-              name="newPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("newPassword")}</FormLabel>
-                  <FormControl>
-                    <div className="space-y-0">
-                      <div className="relative">
-                        <Input
-                          type={showNewPassword ? "text" : "password"}
-                          placeholder={t("newPasswordPlaceholder")}
-                          className="pr-10"
-                          {...field}
-                          onFocus={() => setShowPasswordRequirements(true)}
-                          onBlur={() => setShowPasswordRequirements(false)}
-                        />
-                        <button
-                          type="button"
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                          onClick={() => setShowNewPassword(!showNewPassword)}
-                        >
-                          {showNewPassword ? (
-                            <EyeOff className="w-4 h-4" />
-                          ) : (
-                            <Eye className="w-4 h-4" />
-                          )}
-                        </button>
-                      </div>
-                      <PasswordStrength password={field.value} show={showPasswordRequirements} />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="revokeOtherSessions"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                  <FormControl>
-                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                  </FormControl>
-                  <div className="space-y-1 leading-none">
-                    <FormLabel>{t("revokeOtherSessions")}</FormLabel>
+                    <PasswordStrength password={field.value} show={showPasswordRequirements} />
                   </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            <div className="flex justify-end">
-              <Button type="submit" disabled={form.formState.isSubmitting}>
-                <LoadingSwap isLoading={form.formState.isSubmitting}>
-                  {t("changePassword")}
-                </LoadingSwap>
-              </Button>
-            </div>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+          <FormField
+            control={form.control}
+            name="revokeOtherSessions"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                <FormControl>
+                  <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel>{t("revokeOtherSessions")}</FormLabel>
+                </div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className="flex justify-end">
+            <Button type="submit" disabled={form.formState.isSubmitting}>
+              <LoadingSwap isLoading={form.formState.isSubmitting}>
+                {t("changePassword")}
+              </LoadingSwap>
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </section>
   );
 }

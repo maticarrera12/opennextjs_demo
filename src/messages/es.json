@@ -252,6 +252,8 @@
       }
     },
     "security": {
+      "title": "Seguridad",
+      "subtitle": "Protege tu cuenta con controles de seguridad robustos",
       "password": {
         "title": "Contraseña",
         "description": "Cambia tu contraseña",

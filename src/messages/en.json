@@ -252,6 +252,8 @@
       }
     },
     "security": {
+      "title": "Security",
+      "subtitle": "Protect your account with strong security controls",
       "password": {
         "title": "Password",
         "description": "Change your password",

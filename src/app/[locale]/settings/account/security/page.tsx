@@ -1,9 +1,9 @@
 import { headers } from "next/headers";
 
 import { PasswordForm } from "./_components/password-form";
+import { SecurityHeader } from "./_components/security-header";
 import { SessionManagement } from "./_components/session-management";
 import { SetPasswordButton } from "./_components/set-password-button";
-import { Card, CardContent } from "@/components/ui/card";
 import { auth, prisma } from "@/lib/auth";
 
 const page = async () => {
@@ -21,16 +21,9 @@ const page = async () => {
 
   return (
     <div className="space-y-6">
+      <SecurityHeader />
       {hasPassword ? <PasswordForm /> : <SetPasswordButton email={user.email} />}
-
-      <Card>
-        <CardContent>
-          <SessionManagement
-            sessions={sessions}
-            currentSessionToken={session?.session.token || ""}
-          />
-        </CardContent>
-      </Card>
+      <SessionManagement sessions={sessions} currentSessionToken={session?.session.token || ""} />
     </div>
   );
 };

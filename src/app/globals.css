@@ -259,6 +259,46 @@
   color: #3b82f6 !important;
 }
 
+/* Modern scrollbars */
+:root {
+  --scrollbar-size: 0.625rem;
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: color-mix(in oklch, var(--muted) 70%, transparent);
+  --scrollbar-thumb-hover: color-mix(in oklch, var(--muted-foreground) 40%, transparent);
+}
+
+.dark {
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: color-mix(in oklch, var(--muted) 45%, transparent);
+  --scrollbar-thumb-hover: color-mix(in oklch, var(--muted-foreground) 35%, transparent);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 9999px;
+  border: calc(var(--scrollbar-size) / 4) solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  background-clip: content-box;
+}
+
 @layer utilities {
   .scrollbar-hide {
     -ms-overflow-style: none;

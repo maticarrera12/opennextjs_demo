@@ -1,13 +1,5 @@
 "use client";
-import {
-  UserIcon,
-  LockIcon,
-  BellIcon,
-  PaletteIcon,
-  CreditCardIcon,
-  KeyIcon,
-  UsersIcon,
-} from "lucide-react";
+import { UserIcon, LockIcon, CreditCardIcon, KeyIcon, UsersIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
@@ -30,21 +22,6 @@ export default function SettingsSidebar() {
           name: t("menu.security"),
           href: "/settings/account/security",
           icon: LockIcon,
-        },
-        {
-          name: t("menu.notifications"),
-          href: "/settings/account/notifications",
-          icon: BellIcon,
-        },
-      ],
-    },
-    {
-      label: t("sections.preferences"),
-      items: [
-        {
-          name: t("menu.appearance"),
-          href: "/settings/preferences/appearance",
-          icon: PaletteIcon,
         },
       ],
     },
