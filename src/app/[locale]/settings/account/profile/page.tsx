@@ -1,40 +1,62 @@
 import { headers } from "next/headers";
 
-import { AccountLinking } from "./_components/account-linking";
-import { DangerZone } from "./_components/danger-zone";
-import { PersonalInfoForm } from "./_components/personal-info-form";
-import { PlanSection } from "./_components/plan-section";
-import { ProfileHeader } from "./_components/profile-header";
-import { ProfilePictureSection } from "./_components/profile-picture-section";
-import { Card, CardContent } from "@/components/ui/card";
+import { ProfileSettingsClient } from "./_components/profile-settings-client";
 import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+
+type LinkedAccount = Awaited<ReturnType<typeof auth.api.listUserAccounts>>[number];
+
+type SerializedAccount = {
+  id: string;
+  providerId: string;
+  accountId: string;
+  createdAt: string;
+};
 
 const page = async () => {
   const session = await auth.api.getSession({ headers: await headers() });
-  const user = session!.user;
-  const userPlan = (user as { plan?: string })?.plan || "FREE";
+
+  if (!session?.user?.id) {
+    throw new Error("User session not found");
+  }
+
+  const userRecord = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      image: true,
+      plan: true,
+      theme: true,
+      language: true,
+    },
+  });
+
+  const user = userRecord ?? session.user;
+  const userPlan = user.plan || "FREE";
 
   const accounts = await auth.api.listUserAccounts({
     headers: await headers(),
   });
-  const nonCredentialsAccounts = (accounts || []).filter(
-    (account) => account.providerId !== "credentials"
+
+  const nonCredentialsAccounts = (accounts ?? []).filter(
+    (account: LinkedAccount) => account.providerId !== "credentials"
   );
 
-  return (
-    <div className="space-y-6">
-      <ProfileHeader />
-      <ProfilePictureSection user={user} plan={userPlan} />
-      <PersonalInfoForm user={user} />
+  const serializedAccounts: SerializedAccount[] = nonCredentialsAccounts.map((account) => ({
+    id: account.id,
+    providerId: account.providerId,
+    accountId: account.accountId,
+    createdAt: account.createdAt.toISOString(),
+  }));
 
-      <Card>
-        <CardContent>
-          <AccountLinking currentAccounts={nonCredentialsAccounts} />
-        </CardContent>
-      </Card>
-      <PlanSection plan={userPlan} />
-      <DangerZone />
-    </div>
+  return (
+    <ProfileSettingsClient
+      user={JSON.parse(JSON.stringify(user))}
+      plan={userPlan}
+      accounts={serializedAccounts}
+    />
   );
 };
 

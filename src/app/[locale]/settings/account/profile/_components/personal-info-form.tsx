@@ -3,78 +3,122 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { LoadingSwap } from "@/components/ui/loading-swap";
 import { authClient } from "@/lib/auth-client";
 import { ProfileUpdateInput, profileUpdateSchema } from "@/lib/schemas";
+
+export interface PersonalInfoFormHandle {
+  submit: () => Promise<void>;
+  reset: () => void;
+}
 
 interface PersonalInfoFormProps {
   user: {
     name?: string | null;
     email?: string | null;
   };
+  onDirtyChange?: (dirty: boolean) => void;
 }
 
-export function PersonalInfoForm({ user }: PersonalInfoFormProps) {
-  const t = useTranslations("settings.profile.personalInfo");
-  const form = useForm<ProfileUpdateInput>({
-    resolver: zodResolver(profileUpdateSchema),
-    defaultValues: {
+export const PersonalInfoForm = forwardRef<PersonalInfoFormHandle, PersonalInfoFormProps>(
+  ({ user, onDirtyChange }, ref) => {
+    const t = useTranslations("settings.profile.personalInfo");
+    const router = useRouter();
+
+    const form = useForm<ProfileUpdateInput>({
+      resolver: zodResolver(profileUpdateSchema),
+      defaultValues: {
+        name: user.name || "",
+        email: user.email || "",
+      },
+    });
+
+    const baseValuesRef = useRef<ProfileUpdateInput>({
       name: user.name || "",
       email: user.email || "",
-    },
-  });
-  const router = useRouter();
-  const { isSubmitting } = form.formState;
+    });
 
-  async function handleUpdateProfile(data: ProfileUpdateInput) {
-    const promises = [
-      authClient.updateUser({
-        name: data.name,
-      }),
-    ];
+    useEffect(() => {
+      onDirtyChange?.(form.formState.isDirty);
+    }, [form.formState.isDirty, onDirtyChange]);
 
-    if (data.email !== user.email) {
-      promises.push(
-        authClient.changeEmail({
-          newEmail: data.email,
-          callbackURL: "/verify-email-success",
-        })
-      );
-    }
+    useEffect(() => {
+      const nextValues: ProfileUpdateInput = {
+        name: user.name || "",
+        email: user.email || "",
+      };
+      baseValuesRef.current = nextValues;
 
-    const res = await Promise.all(promises);
-    const updateUserResult = res[0];
-    const emailResult = res[1] ?? { error: null };
+      if (!form.formState.isDirty) {
+        form.reset(nextValues);
+      }
+    }, [form, user.email, user.name]);
 
-    if (updateUserResult.error) {
-      toast.error(updateUserResult.error.message || t("messages.updateFailed"));
-    } else if (emailResult.error) {
-      toast.error(emailResult.error.message || t("messages.emailVerificationFailed"));
-    } else {
+    const handleUpdateProfile = async (data: ProfileUpdateInput) => {
+      if (!form.formState.isDirty) return;
+
+      const requests = [
+        authClient.updateUser({
+          name: data.name,
+        }),
+      ];
+
+      if (data.email !== user.email) {
+        requests.push(
+          authClient.changeEmail({
+            newEmail: data.email,
+            callbackURL: "/verify-email-success",
+          })
+        );
+      }
+
+      const responses = await Promise.all(requests);
+      const updateResult = responses[0];
+      const emailResult = responses[1] ?? { error: null };
+
+      if (updateResult.error) {
+        toast.error(updateResult.error.message || t("messages.updateFailed"));
+        return;
+      }
+
+      if (emailResult.error) {
+        toast.error(emailResult.error.message || t("messages.emailVerificationFailed"));
+        return;
+      }
+
       if (data.email !== user.email) {
         toast.success(t("messages.emailVerificationSent"));
       } else {
         toast.success(t("messages.updateSuccess"));
       }
-      router.refresh();
-    }
-  }
 
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{t("title")}</CardTitle>
-        <CardDescription>{t("description")}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={form.handleSubmit(handleUpdateProfile)} className="space-y-4">
+      baseValuesRef.current = {
+        name: data.name,
+        email: data.email,
+      };
+
+      form.reset(data);
+      router.refresh();
+    };
+
+    useImperativeHandle(ref, () => ({
+      submit: () => form.handleSubmit(handleUpdateProfile)(),
+      reset: () => form.reset({ ...baseValuesRef.current }),
+    }));
+
+    return (
+      <section className="space-y-6">
+        <header className="space-y-1">
+          <h2 className="text-lg font-semibold text-foreground">{t("title")}</h2>
+          <p className="text-sm text-muted-foreground">{t("description")}</p>
+        </header>
+
+        <form className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="name">{t("fullName")}</Label>
@@ -90,17 +134,10 @@ export function PersonalInfoForm({ user }: PersonalInfoFormProps) {
               />
             </div>
           </div>
-          <div className="flex justify-end">
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-            >
-              <LoadingSwap isLoading={isSubmitting}>{t("saveChanges")}</LoadingSwap>
-            </Button>
-          </div>
         </form>
-      </CardContent>
-    </Card>
-  );
-}
+      </section>
+    );
+  }
+);
+
+PersonalInfoForm.displayName = "PersonalInfoForm";

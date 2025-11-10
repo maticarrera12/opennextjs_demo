@@ -3,6 +3,8 @@ declare module "better-auth" {
   export interface User {
     plan?: string;
     credits?: number;
+    theme?: string;
+    language?: string;
   }
 }
 

@@ -4,7 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 
 import { QueryProvider } from "./query-provider";
 import { ThemeProvider } from "./theme-provider";
-
+import { useSession } from "@/lib/auth-client";
 export function AppProviders({
   children,
   locale,
@@ -14,13 +14,19 @@ export function AppProviders({
   locale: string;
   messages: any;
 }) {
+  const { data: session } = useSession();
+  const userTheme = (session?.user as { theme?: string } | undefined)?.theme ?? "system";
+  const userLanguage = (session?.user as { language?: string } | undefined)?.language ?? locale;
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider locale={userLanguage} messages={messages}>
+      {" "}
       <QueryProvider>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-        </ThemeProvider>
-      </QueryProvider>
+        {" "}
+        <ThemeProvider attribute="class" defaultTheme={userTheme} enableSystem>
+          {" "}
+          {children}{" "}
+        </ThemeProvider>{" "}
+      </QueryProvider>{" "}
     </NextIntlClientProvider>
   );
 }

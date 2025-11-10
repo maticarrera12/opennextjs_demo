@@ -64,6 +64,14 @@ export const auth = betterAuth({
         type: "string",
         required: false,
       },
+      theme: {
+        type: "string",
+        required: false,
+      },
+      language: {
+        type: "string",
+        required: false,
+      },
     },
   },
   database: prismaAdapter(prisma, { provider: "postgresql" }),

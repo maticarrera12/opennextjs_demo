@@ -242,6 +242,7 @@
       },
       "linkedAccounts": {
         "title": "Cuentas Vinculadas",
+        "description": "Conecta inicios de sesión sociales para facilitar el acceso.",
         "noAccounts": "No se encontraron cuentas vinculadas",
         "linkOther": "Vincular Otras Cuentas",
         "connectAccount": "Conecta tu cuenta de {provider} para iniciar sesión más fácilmente",

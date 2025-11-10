@@ -242,6 +242,7 @@
       },
       "linkedAccounts": {
         "title": "Linked Accounts",
+        "description": "Connect social logins to make signing in easier.",
         "noAccounts": "No linked accounts found",
         "linkOther": "Link Other Accounts",
         "connectAccount": "Connect your {provider} account for easier sign-in",
