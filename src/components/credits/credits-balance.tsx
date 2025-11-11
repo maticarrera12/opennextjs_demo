@@ -112,7 +112,7 @@ export function CreditBalance() {
         </Link>
         <Link
           href="/dashboard/billing"
-          className="rounded-md border border-border px-3 py-1.5 text-xs hover:bg-accent"
+          className="rounded-md text-foreground border border-border px-3 py-1.5 text-xs hover:bg-accent"
         >
           View Usage
         </Link>

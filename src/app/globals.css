@@ -232,22 +232,6 @@
   }
 }
 
-/* ===== Efecto curvo inverso estilo "Calendar" ===== */
-
-/* Hide scrollbars globally */
-:root {
-  --scrollbar-size: 0px;
-}
-
-* {
-  scrollbar-width: none;
-}
-
-*::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
 @layer utilities {
   .scrollbar-hide {
     -ms-overflow-style: none;

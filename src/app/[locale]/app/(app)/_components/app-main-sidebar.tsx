@@ -62,6 +62,7 @@ export default function AppMainSidebar() {
       sections={sidebarSections}
       logoutLabel={t("menu.logout")}
       topContent={<CreditBalance />}
+      topContentHeightClass="h-44"
       onBack={() => router.back()}
     />
   );

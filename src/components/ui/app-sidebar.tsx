@@ -29,6 +29,7 @@ interface AppSidebarProps {
   sections: SidebarSection[];
   logoutLabel: string;
   topContent?: React.ReactNode;
+  topContentHeightClass?: string;
   bottomContent?: React.ReactNode;
   backHref?: string;
   onBack?: () => void;
@@ -40,6 +41,7 @@ export default function AppSidebar({
   sections,
   logoutLabel,
   topContent,
+  topContentHeightClass,
   bottomContent,
   backHref,
   onBack,
@@ -192,18 +194,27 @@ export default function AppSidebar({
             </div>
 
             {/* Contenido adicional superior */}
-            <div className="mb-4 h-44 pr-4">
+            {topContent && (
               <div
                 className={cn(
-                  isHovered || isOpen
-                    ? "opacity-100 visible pointer-events-auto"
-                    : "opacity-0 invisible pointer-events-none",
-                  "transition-opacity duration-75 h-full"
+                  "mb-4 pr-4",
+                  topContentHeightClass,
+                  !topContentHeightClass && "h-auto"
                 )}
               >
-                {topContent}
+                <div
+                  className={cn(
+                    isHovered || isOpen
+                      ? "opacity-100 visible pointer-events-auto"
+                      : "opacity-0 invisible pointer-events-none",
+                    "transition-opacity duration-75",
+                    topContentHeightClass ? "h-full" : undefined
+                  )}
+                >
+                  {topContent}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Secciones */}
             {sections.map((section) => (
