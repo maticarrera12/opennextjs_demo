@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -17,11 +16,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LoadingSwap } from "@/components/ui/loading-swap";
+import { useLocaleRouting } from "@/hooks/useLocaleRouting";
 import { authClient } from "@/lib/auth-client";
 import { forgotPasswordSchema, ForgotPasswordInput } from "@/lib/schemas/auth.schema";
 
 function ForgotPassword() {
-  const router = useRouter();
+  const { push, locale } = useLocaleRouting();
   const t = useTranslations("auth.forgotPassword");
   const form = useForm<ForgotPasswordInput>({
     resolver: zodResolver(forgotPasswordSchema),
@@ -36,7 +36,7 @@ function ForgotPassword() {
     await authClient.requestPasswordReset(
       {
         ...data,
-        redirectTo: "/reset-password",
+        redirectTo: `/${locale}/reset-password`,
       },
       {
         onError: (error) => {
@@ -67,7 +67,7 @@ function ForgotPassword() {
         />
 
         <div className="flex gap-2">
-          <Button type="button" variant="outline" onClick={() => router.push("/signin")}>
+          <Button type="button" variant="outline" onClick={() => push("/signin")}>
             {t("backToSignIn")}
           </Button>
           <Button

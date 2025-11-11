@@ -1,13 +1,14 @@
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
+import { useLocaleRouting } from "@/hooks/useLocaleRouting";
 import { authClient } from "@/lib/auth-client";
 
 export default function VerifyEmailSuccessPage() {
-  const router = useRouter();
+  const { push } = useLocaleRouting();
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
 
@@ -31,7 +32,7 @@ export default function VerifyEmailSuccessPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["session"] });
-      setTimeout(() => router.push(redirectPath), 2000);
+      setTimeout(() => push(redirectPath), 2000);
     },
   });
 
@@ -71,7 +72,7 @@ export default function VerifyEmailSuccessPage() {
                 : "There was an error verifying your email."}
             </p>
             <button
-              onClick={() => router.push(redirectPath)}
+              onClick={() => push(redirectPath)}
               className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
             >
               {isChangeEmail ? "Go to Profile" : "Go to Home"}

@@ -2,8 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { Eye, EyeOff } from "lucide-react";
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -22,6 +21,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { LoadingSwap } from "@/components/ui/loading-swap";
 import { Separator } from "@/components/ui/separator";
+import { useLocaleRouting } from "@/hooks/useLocaleRouting";
+import { Link } from "@/i18n/routing";
 import { signIn } from "@/lib/actions/auth-actions";
 import { authClient } from "@/lib/auth-client";
 import { signInSchema, type SignInInput } from "@/lib/schemas";
@@ -29,7 +30,7 @@ import { signInSchema, type SignInInput } from "@/lib/schemas";
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-  const router = useRouter();
+  const { push } = useLocaleRouting();
   const searchParams = useSearchParams();
   const t = useTranslations("auth.signin");
   const queryClient = useQueryClient();
@@ -53,7 +54,7 @@ export default function SignInPage() {
       if (result && result.user) {
         queryClient.invalidateQueries({ queryKey: ["session"] });
         toast.success(t("success"));
-        router.push(searchParams.get("callbackUrl") || "/");
+        push(searchParams.get("callbackUrl") || "/");
       } else {
         setError(t("error"));
         toast.error(t("error"));
@@ -67,9 +68,9 @@ export default function SignInPage() {
 
   useEffect(() => {
     authClient.getSession().then((session) => {
-      if (session.data != null) router.push("/");
+      if (session.data != null) push("/");
     });
-  }, [router]);
+  }, [push]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">

@@ -2,11 +2,29 @@
 
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 import { Toggle } from "@/components/ui/toggle";
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
+    // evita renderizar antes de que se monte el tema
+    return (
+      <Toggle
+        variant="outline"
+        className="group size-8 rounded-full border-none text-muted-foreground shadow-none"
+        aria-label="Toggle theme"
+        disabled
+      >
+        <SunIcon size={16} className="opacity-50" />
+      </Toggle>
+    );
+  }
 
   const isDark = theme === "dark";
 

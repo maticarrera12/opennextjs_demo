@@ -2,8 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -22,13 +20,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { LoadingSwap } from "@/components/ui/loading-swap";
 import { Separator } from "@/components/ui/separator";
+import { useLocaleRouting } from "@/hooks/useLocaleRouting";
+import { Link } from "@/i18n/routing";
 import { signUp } from "@/lib/actions/auth-actions";
 import { authClient } from "@/lib/auth-client";
 import { signUpSchema, type SignUpInput } from "@/lib/schemas";
 
 export default function SignUpPage() {
   const [error, setError] = useState("");
-  const router = useRouter();
+  const { push } = useLocaleRouting();
   const t = useTranslations("auth.signup");
   const queryClient = useQueryClient();
 
@@ -54,7 +54,7 @@ export default function SignUpPage() {
       } else {
         queryClient.invalidateQueries({ queryKey: ["session"] });
         // Redirect to verification page on success
-        router.push(`/verificationEmail?email=${encodeURIComponent(data.email)}`);
+        push(`/verificationEmail?email=${encodeURIComponent(data.email)}`);
       }
     } catch (err) {
       setError(`${t("unexpectedError")}: ${err instanceof Error ? err.message : "Unknown error"}`);
@@ -63,9 +63,9 @@ export default function SignUpPage() {
 
   useEffect(() => {
     authClient.getSession().then((session) => {
-      if (session.data != null) router.push("/");
+      if (session.data != null) push("/");
     });
-  }, [router]);
+  }, [push]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">

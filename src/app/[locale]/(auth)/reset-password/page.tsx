@@ -1,8 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -12,11 +11,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { LoadingSwap } from "@/components/ui/loading-swap";
+import { useLocaleRouting } from "@/hooks/useLocaleRouting";
+import { Link } from "@/i18n/routing";
 import { authClient } from "@/lib/auth-client";
 import { ResetPasswordInput, resetPasswordSchema } from "@/lib/schemas";
 
 export default function ResetPasswordPage() {
-  const router = useRouter();
+  const { push } = useLocaleRouting();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const error = searchParams.get("error");
@@ -46,7 +47,7 @@ export default function ResetPasswordPage() {
         onSuccess: () => {
           toast.success(t("success"));
           setTimeout(() => {
-            router.push("/signin");
+            push("/signin");
           }, 1000);
         },
       }

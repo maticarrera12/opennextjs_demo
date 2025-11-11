@@ -3,15 +3,16 @@
 import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import React from "react";
 
 import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
+import { useLocaleRouting } from "@/hooks/useLocaleRouting";
 
 // import Image from "next/image";
 
 const Hero = () => {
   const t = useTranslations("hero");
-
+  const { locale } = useLocaleRouting();
+  const appRoute = `/${locale}/app`;
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 md:px-6 lg:px-8">
       <div className="container max-w-6xl mx-auto">
@@ -34,7 +35,7 @@ const Hero = () => {
             <div className="flex items-center justify-center gap-4 pt-4">
               <AnimatedButton
                 label={t("cta")}
-                route="/app"
+                route={appRoute}
                 animate={true}
                 animateOnScroll={true}
                 delay={0.2}
