@@ -81,16 +81,11 @@ export default function AppSidebar({
   return (
     <>
       {/* Navbar mobile */}
-      <div
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 flex h-14 items-center  md:hidden text-white",
-          variant === "flush" ? "bg-background border-border/80" : "bg-primary border-border/60"
-        )}
-      >
+      {!isOpen && (
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="group rounded-lg p-2 text-white transition-colors hover:bg-white/10"
-          aria-expanded={isOpen}
+          onClick={() => setIsOpen(true)}
+          className="fixed top-3 left-3 z-50 flex h-9 w-9 items-center justify-center rounded-lg bg-transparent text-black md:hidden"
+          aria-label="Open sidebar"
         >
           <svg
             className="pointer-events-none"
@@ -103,22 +98,15 @@ export default function AppSidebar({
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <path
-              d="M4 12L20 12"
-              className="origin-center -translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]"
-            />
-            <path
-              d="M4 12H20"
-              className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
-            />
-            <path
-              d="M4 12H20"
-              className="origin-center translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[135deg]"
-            />
+            <path d="M4 6H20" />
+            <path d="M4 12H20" />
+            <path d="M4 18H20" />
           </svg>
         </button>
-        <span className="ml-3 text-lg font-semibold text-white">{title}</span>
-      </div>
+      )}
+
+      {/* Overlay to dim background including header */}
+      {isOpen && <div className="fixed inset-0 z-30 bg-black/60 md:hidden" aria-hidden="true" />}
 
       {/* Sidebar */}
       <motion.aside
@@ -129,7 +117,7 @@ export default function AppSidebar({
         transition={{ duration: 0.12, ease: "easeInOut" }}
         className={cn(
           "z-40 h-screen shrink-0 text-white",
-          "fixed left-0 top-14 md:sticky md:top-0",
+          "fixed left-0 top-0 md:sticky md:top-0",
           "md:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0",
           variant === "flush"
@@ -137,7 +125,29 @@ export default function AppSidebar({
             : "bg-primary shadow-lg"
         )}
       >
-        <div className="flex h-full w-full flex-col">
+        <div className="relative flex h-full w-full flex-col">
+          {isOpen && (
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute top-3 right-3 z-50 flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-white md:hidden"
+              aria-label="Close sidebar"
+            >
+              <svg
+                className="pointer-events-none"
+                width={18}
+                height={18}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M18 6L6 18" />
+                <path d="M6 6L18 18" />
+              </svg>
+            </button>
+          )}
           {/* -------- TOP AREA (scrollable) -------- */}
           <div className="flex-1 overflow-y-auto pl-4 pr-0 py-4 scrollbar-hide">
             {/* Back button */}
