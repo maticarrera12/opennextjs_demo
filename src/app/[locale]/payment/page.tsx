@@ -1,9 +1,9 @@
 import { CheckCircle2 } from "lucide-react";
 import { headers } from "next/headers";
-import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Link } from "@/i18n/routing";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import type { PaymentMetadata } from "@/types/payment";

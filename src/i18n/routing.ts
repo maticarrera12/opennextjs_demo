@@ -7,6 +7,9 @@ export const routing = defineRouting({
 
   // Used when no locale matches
   defaultLocale: "en",
+
+  // Always include the locale in URLs since our routes live under /[locale]
+  localePrefix: "always",
 });
 
 export const { Link, redirect, usePathname, useRouter } = createNavigation(routing);

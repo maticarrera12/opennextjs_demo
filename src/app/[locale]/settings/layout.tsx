@@ -1,14 +1,22 @@
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import type { ReactNode } from "react";
 
 import SettingsSidebar from "./_components/settings-sidebar";
+import { redirect } from "@/i18n/routing";
 import { auth } from "@/lib/auth";
 
-export default async function SettingsLayout({ children }: { children: React.ReactNode }) {
+export default async function SettingsLayout({
+  children,
+  params,
+}: {
+  children: ReactNode;
+  params: { locale: string };
+}) {
   const session = await auth.api.getSession({ headers: await headers() });
 
   if (!session?.user) {
-    redirect("/signin");
+    redirect({ href: "/signin", locale: params.locale });
+    return null;
   }
 
   return (

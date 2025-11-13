@@ -1,0 +1,84 @@
+"use client";
+
+import { Bell, Boxes, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
+
+import Logo from "../navbar/logo";
+import UserMenu from "../navbar/user-menu";
+import { useFormattedDate } from "@/hooks/useFormattedData";
+import { useSessionQuery } from "@/hooks/useSessionQuery";
+import { Link } from "@/i18n/routing";
+
+const Header = () => {
+  const { data: session } = useSessionQuery();
+  const t = useTranslations("header");
+  const formatted = useFormattedDate();
+  const rawFirstName = session?.user.name?.trim().split(/\s+/)?.[0] ?? "";
+  const formattedFirstName =
+    rawFirstName.length > 0
+      ? `${rawFirstName.charAt(0).toUpperCase()}${rawFirstName.slice(1).toLowerCase()}`
+      : "";
+  const greetingName = formattedFirstName || session?.user.name || session?.user.email || "";
+
+  return (
+    <header className="mx-auto mt-10 w-full max-w-6xl px-4 md:px-6">
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex flex-1 items-center justify-between">
+          <div className="flex items-center gap-2 rounded-full border p-1">
+            <div>
+              <UserMenu />
+            </div>
+            <div className="flex flex-col gap-0.5 text-left">
+              <span className="text-sm font-medium text-foreground">{session?.user.name}</span>
+              <span className="text-xs text-muted-foreground">{session?.user.email}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Link
+                href="/app/my-brand"
+                className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition hover:bg-muted hover:text-foreground"
+                aria-label={t("savedAssetsAria")}
+              >
+                <Boxes className="size-4" />
+              </Link>
+              <Link
+                href="/app/create-brand"
+                className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition hover:bg-muted hover:text-foreground"
+                aria-label={t("generateAiAria")}
+              >
+                <Sparkles className="size-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className="flex h-16 items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <Logo />
+          </div>
+          <div className="flex flex-col gap-0.5">
+            <span className="text-sm font-medium text-foreground">
+              {t("greeting", { name: greetingName })}
+            </span>
+            <span className="text-xs text-muted-foreground">{t("subtitle")}</span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3 rounded-full border border-gray-300 dark:border-neutral-700 px-1 py-1 shadow-sm">
+          {/* Icon circle */}
+          <div className="flex items-center justify-center w-9 h-9 rounded-full  dark:bg-neutral-800">
+            <Bell className="w-4 h-4 text-neutral-700 dark:text-neutral-200" />
+          </div>
+
+          {/* Date */}
+          <span className="font-semibold text-sm md:text-base">{formatted}</span>
+
+          {/* Badge count */}
+          <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-black text-white text-xs font-semibold">
+            5
+          </span>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;

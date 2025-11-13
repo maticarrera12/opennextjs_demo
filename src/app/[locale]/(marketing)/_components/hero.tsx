@@ -1,10 +1,10 @@
 "use client";
 
 import { ArrowRightIcon } from "lucide-react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
+import { Link } from "@/i18n/routing";
 
 // import Image from "next/image";
 

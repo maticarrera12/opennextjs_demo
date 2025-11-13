@@ -1,16 +1,22 @@
 import { headers } from "next/headers";
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import React from "react";
+import type { ReactNode } from "react";
 
 import AdminSidebar from "./_components/admin-sidebar";
+import { Link, redirect } from "@/i18n/routing";
 import { auth, prisma } from "@/lib/auth";
 
-const layout = async ({ children }: { children: React.ReactNode }) => {
+const layout = async ({
+  children,
+  params,
+}: {
+  children: ReactNode;
+  params: { locale: string };
+}) => {
   const session = await auth.api.getSession({ headers: await headers() });
 
   if (!session?.user) {
-    redirect("/signin");
+    redirect({ href: "/signin", locale: params.locale });
+    return null;
   }
 
   // Verificar rol ADMIN desde la base de datos
@@ -28,7 +34,7 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
             You do not have permission to access this page.
           </p>
           <Link href="/app" className="text-primary hover:underline">
-            Go to Dashboard
+            Go to App
           </Link>
         </div>
       </div>

@@ -1,8 +1,8 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
 
+import { Link } from "@/i18n/routing";
 import { useSession } from "@/lib/auth-client";
 
 interface CreditInfo {

@@ -1,7 +1,6 @@
 "use client";
 import { useQueryClient } from "@tanstack/react-query";
 import { BoltIcon, BookOpenIcon, LogOutIcon, PinIcon, UserPenIcon, ShieldIcon } from "lucide-react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -18,6 +17,7 @@ import {
 import { useAdminRoleQuery } from "@/hooks/useAdminRoleQuery";
 import { useLocaleRouting } from "@/hooks/useLocaleRouting";
 import { useSessionQuery } from "@/hooks/useSessionQuery";
+import { Link } from "@/i18n/routing";
 import { authClient } from "@/lib/auth-client";
 
 export default function UserMenu() {
@@ -46,9 +46,11 @@ export default function UserMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
-          <Avatar>
+          <Avatar className="size-12">
             <AvatarImage src={session.user.image || ""} alt="Profile" />
-            <AvatarFallback>{session.user.name?.[0]?.toUpperCase() ?? "U"}</AvatarFallback>
+            <AvatarFallback className="text-xl">
+              {session.user.name?.[0]?.toUpperCase() ?? "U"}
+            </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -64,13 +66,13 @@ export default function UserMenu() {
 
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href={`/${locale}/settings/account/profile`}>
+            <Link href="/settings/account/profile" locale={locale}>
               <BoltIcon size={16} className="opacity-60" /> <span>{t("menu.option1")}</span>
             </Link>
           </DropdownMenuItem>
           {isAdmin && (
             <DropdownMenuItem asChild>
-              <Link href={`/${locale}/dashboard`}>
+              <Link href="/dashboard" locale={locale}>
                 <ShieldIcon size={16} className="opacity-60" /> <span>{t("menu.adminPanel")}</span>
               </Link>
             </DropdownMenuItem>

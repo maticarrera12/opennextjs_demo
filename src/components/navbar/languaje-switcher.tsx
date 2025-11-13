@@ -1,7 +1,6 @@
 "use client";
 
 import { GlobeIcon } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 import {
@@ -11,6 +10,7 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
+import { useLocaleRouting } from "@/hooks/useLocaleRouting";
 import { cn } from "@/lib/utils";
 
 const languages = [
@@ -23,18 +23,14 @@ interface LanguageSwitcherProps {
 }
 
 export function LanguageSwitcher({ variant = "default" }: LanguageSwitcherProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const currentLocale = pathname.split("/")[1] || "en";
+  const { router, pathname, locale } = useLocaleRouting();
 
-  const handleChange = (locale: string) => {
-    // Cambiar de idioma reemplazando el prefijo [locale]
-    const newPathname = pathname.replace(/^\/[^/]+/, `/${locale}`);
-    router.replace(newPathname);
+  const handleChange = (nextLocale: string) => {
+    router.replace(pathname, { locale: nextLocale });
   };
 
   return (
-    <Select defaultValue={currentLocale} onValueChange={handleChange}>
+    <Select value={locale} onValueChange={handleChange}>
       <SelectTrigger
         className={cn(
           "h-8 border-none px-2 shadow-none [&>svg]:shrink-0",

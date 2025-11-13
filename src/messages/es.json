@@ -423,5 +423,11 @@
       "productUsage": "Uso del Producto (IA y Assets)",
       "logout": "Cerrar Sesión"
     }
+  },
+  "header": {
+    "greeting": "Hola {name}",
+    "subtitle": "Bienvenido a OpenNextJS",
+    "savedAssetsAria": "Ver recursos guardados",
+    "generateAiAria": "Generar con IA"
   }
 }
