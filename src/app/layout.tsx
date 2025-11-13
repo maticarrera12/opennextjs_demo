@@ -5,13 +5,13 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }) {
   const headersList = await headers();
   const pathname = headersList.get("x-pathname") || "";
 
   const isDocsOrLegal = pathname.startsWith("/docs") || pathname.startsWith("/legal");
-  const { locale } = await params;
+  const { locale } = params;
   return (
     <html lang={locale} suppressHydrationWarning>
       <body suppressHydrationWarning>{isDocsOrLegal ? children : children}</body>
