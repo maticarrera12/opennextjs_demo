@@ -7,7 +7,9 @@ import dynamic from "next/dynamic";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 
-import { AppProviders } from "@/providers/app-providers";
+import { AppProviders } from "../../../app-providers";
+import MessagesProvider from "@/providers/message-provider";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,6 +33,8 @@ export default async function LocaleLayout({
   params: { locale: string };
 }) {
   const { locale } = params;
+
+  // 👇 ESTE ERA EL QUE FALTABA (Y CAUSA EL ERROR)
   const messages = (await import(`@/messages/${locale}.json`)).default;
 
   const CrispWithNoSSR = dynamic(() => import("../../components/crisp"));
@@ -38,13 +42,15 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <AppProviders locale={locale} messages={messages}>
-          {children}
-          <Toaster position="top-right" richColors />
-          <Analytics />
-          <SpeedInsights />
-          <CrispWithNoSSR />
-        </AppProviders>
+        <MessagesProvider locale={locale} messages={messages}>
+          <AppProviders>
+            {children}
+            <Toaster position="top-right" richColors />
+            <Analytics />
+            <SpeedInsights />
+            <CrispWithNoSSR />
+          </AppProviders>
+        </MessagesProvider>
       </body>
     </html>
   );

@@ -1,20 +1,7 @@
-import { headers } from "next/headers";
-
-export default async function RootLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { locale: string };
-}) {
-  const headersList = await headers();
-  const pathname = headersList.get("x-pathname") || "";
-
-  const isDocsOrLegal = pathname.startsWith("/docs") || pathname.startsWith("/legal");
-  const { locale } = params;
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body suppressHydrationWarning>{isDocsOrLegal ? children : children}</body>
+    <html suppressHydrationWarning>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }
