@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 
 import { PaymentMethodSelector } from "./payment-method-selector";
 import { PricingSkeleton } from "./pricing-skeleton";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -15,6 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Modal } from "@/components/ui/modal";
+import { Separator } from "@/components/ui/separator";
 import { authClient } from "@/lib/auth-client";
 import { PLANS, CREDIT_PACKS } from "@/lib/credits/constants";
 
@@ -229,7 +231,7 @@ function PlanCard({ plan, interval, isPopular, t, onChoosePlan, currentUserPlan 
 
   return (
     <Card
-      className={`relative ${isPopular ? "border-primary shadow-lg ring-2 ring-primary/20" : ""}`}
+      className={`relative rounded-3xl ${isPopular ? "border-primary shadow-lg ring-2 ring-primary/20" : ""}`}
     >
       {isPopular && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-xs font-semibold">
@@ -237,9 +239,13 @@ function PlanCard({ plan, interval, isPopular, t, onChoosePlan, currentUserPlan 
         </div>
       )}
 
-      <CardHeader className="text-center pb-4">
+      <CardHeader className="py-8 bg-background mx-2 my-2 rounded-3xl shadow-sm">
         <CardTitle className="text-2xl">{plan.name}</CardTitle>
-        <div className="mt-4 flex items-baseline justify-center">
+        {"description" in plan && plan.description ? (
+          <p className="mt-2 text-sm text-muted-foreground">{plan.description}</p>
+        ) : null}
+        <Separator className="my-4" />
+        <div className="mt-4 flex items-baseline justify-start">
           <span className="text-5xl font-bold text-foreground">${pricePerMonth}</span>
           <span className="ml-2 text-muted-foreground">{t("perMonth")}</span>
         </div>
@@ -248,9 +254,27 @@ function PlanCard({ plan, interval, isPopular, t, onChoosePlan, currentUserPlan 
             {t("billedAnnually", { price: `$${price}` })}
           </CardDescription>
         )}
+        <Button
+          onClick={onChoosePlan}
+          disabled={isCurrentPlan}
+          className={`w-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 rounded-full mt-4 font-semibold transition ${
+            isCurrentPlan ? "cursor-not-allowed border border-primary/20" : ""
+          }`}
+        >
+          {isCurrentPlan
+            ? t("buttons.currentPlan")
+            : plan.id === "free"
+              ? t("buttons.getStarted")
+              : t("buttons.choosePlan")}
+        </Button>
       </CardHeader>
 
       <CardContent className="flex-grow">
+        {"featuresHeading" in plan && plan.featuresHeading ? (
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+            {plan.featuresHeading}
+          </div>
+        ) : null}
         <ul className="space-y-3">
           <li className="flex items-center gap-2">
             <Check className="h-4 w-4 text-primary flex-shrink-0" />
@@ -267,26 +291,6 @@ function PlanCard({ plan, interval, isPopular, t, onChoosePlan, currentUserPlan 
           ))}
         </ul>
       </CardContent>
-
-      <CardFooter>
-        <button
-          onClick={onChoosePlan}
-          disabled={isCurrentPlan}
-          className={`w-full py-3 rounded-lg font-semibold transition ${
-            isCurrentPlan
-              ? "bg-primary/10 text-primary cursor-not-allowed border border-primary/20"
-              : isPopular
-                ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-          }`}
-        >
-          {isCurrentPlan
-            ? t("buttons.currentPlan")
-            : plan.id === "free"
-              ? t("buttons.getStarted")
-              : t("buttons.choosePlan")}
-        </button>
-      </CardFooter>
     </Card>
   );
 }
@@ -294,9 +298,9 @@ function PlanCard({ plan, interval, isPopular, t, onChoosePlan, currentUserPlan 
 function CreditPackCard({ pack, t, onBuyCredits }: CreditPackCardProps) {
   return (
     <Card>
-      <CardHeader className="text-center pb-4">
+      <CardHeader className="pb-4">
         <CardTitle className="text-2xl">{pack.name}</CardTitle>
-        <div className="mt-4 flex items-baseline justify-center">
+        <div className="mt-4 flex items-baseline justify-start">
           <span className="text-5xl font-bold text-foreground">${pack.price}</span>
         </div>
         <CardDescription className="mt-2">

@@ -7,6 +7,8 @@ export const PLANS = {
   FREE: {
     id: "free",
     name: "Free",
+    description: "Essential tools to get started.",
+    featuresHeading: "WHAT'S INCLUDED",
     price: { monthly: 0 },
     credits: {
       monthly: 20,
@@ -30,6 +32,8 @@ export const PLANS = {
   PRO: {
     id: "pro",
     name: "Pro",
+    description: "Advanced features for growing needs.",
+    featuresHeading: "EVERYTHING IN FREE, PLUS:",
     price: {
       monthly: Number(process.env.PRO_PRICE_MONTHLY) || 19,
       annual: Number(process.env.PRO_PRICE_ANNUAL) || 190,
@@ -65,6 +69,8 @@ export const PLANS = {
   BUSINESS: {
     id: "business",
     name: "Business",
+    description: "Full power and support for teams.",
+    featuresHeading: "EVERYTHING IN PRO, PLUS:",
     price: {
       monthly: Number(process.env.BUSINESS_PRICE_MONTHLY) || 49,
       annual: Number(process.env.BUSINESS_PRICE_ANNUAL) || 490,

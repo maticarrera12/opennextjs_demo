@@ -2,7 +2,8 @@
 
 import { useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { LogOutIcon, ArrowLeftIcon, type LucideIcon } from "lucide-react";
+import { ArrowLeftDoubleIcon } from "hugeicons-react";
+import { LogOutIcon, type LucideIcon } from "lucide-react";
 import React, { useState } from "react";
 
 import { LanguageSwitcher } from "@/components/navbar/languaje-switcher";
@@ -64,7 +65,7 @@ export default function AppSidebar({
         aria-expanded={isOpen}
         className={cn(
           "group fixed top-3 left-3 z-50 flex h-9 w-9 items-center justify-center rounded-lg bg-transparent transition-colors md:hidden",
-          isOpen ? "text-white" : "text-black"
+          isOpen ? "text-foreground" : "text-black"
         )}
         aria-label="Toggle sidebar"
       >
@@ -111,14 +112,14 @@ export default function AppSidebar({
         className={cn(
           "z-40 h-screen shrink-0 fixed left-0 top-0 md:sticky md:top-0 transition-transform",
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0",
-          variant === "flush" ? "bg-background border-r border-border/80" : "bg-primary shadow-lg"
+          variant === "flush" ? "bg-background border-r border-border/80" : "bg-card"
         )}
       >
         <div className="flex h-full flex-col">
           {/* -------- TOP AREA -------- */}
-          <div className="flex-1 overflow-y-auto pl-4 py-4 scrollbar-hide">
+          <div className="flex-1 overflow-y-auto px-4 py-4 scrollbar-hide">
             {/* Go back button */}
-            <div className="mb-3 text-white pr-0">
+            <div className="mb-3 text-foreground pr-0">
               <Link
                 href="/"
                 className={cn(
@@ -126,7 +127,7 @@ export default function AppSidebar({
                   "hover:bg-white/10 rounded-lg pr-4"
                 )}
               >
-                <ArrowLeftIcon size={24} className="text-white" />
+                <ArrowLeftDoubleIcon />
               </Link>
             </div>
 
@@ -137,7 +138,9 @@ export default function AppSidebar({
                 isHovered || isOpen ? "opacity-100" : "opacity-0"
               )}
             >
-              <span className="text-lg font-semibold text-white whitespace-nowrap">{title}</span>
+              <span className="text-lg font-semibold text-foreground whitespace-nowrap">
+                {title}
+              </span>
             </div>
 
             {/* Optional top content */}
@@ -162,7 +165,7 @@ export default function AppSidebar({
                 <div className="h-5 mb-1">
                   <span
                     className={cn(
-                      "block text-[11px] font-semibold uppercase tracking-wider text-white/70 transition-all",
+                      "block text-[11px] font-semibold uppercase tracking-wider text-foreground/70 transition-all",
                       isHovered || isOpen ? "opacity-100" : "opacity-0"
                     )}
                   >
@@ -184,13 +187,16 @@ export default function AppSidebar({
                         href={item.href} // ← ¡YA AGREGA EL LOCALE SOLO!
                         onClick={() => setIsOpen(false)}
                         className={cn(
-                          "group grid h-10 grid-cols-[24px_1fr] items-center gap-3 pl-4 text-sm",
+                          "group grid h-10 grid-cols-[24px_1fr] items-center gap-3 px-4 text-sm",
                           isActive
-                            ? "bg-background text-primary rounded-l-xl"
-                            : "text-white hover:bg-white/10 rounded-l-xl"
+                            ? "bg-background rounded-md"
+                            : "text-foreground hover:bg-white/10 rounded-l-xl"
                         )}
                       >
-                        <Icon size={18} className={cn(isActive ? "text-primary" : "text-white")} />
+                        <Icon
+                          size={18}
+                          className={cn(isActive ? "text-foreground" : "text-foreground")}
+                        />
                         <span
                           className={cn(
                             "whitespace-nowrap transition-all",
@@ -208,35 +214,35 @@ export default function AppSidebar({
           </div>
 
           {/* -------- BOTTOM AREA -------- */}
-          <div className="border-t border-white/10 pr-0">
+          <div className="border-t border-foreground/10 pr-0">
             {/* Theme + Language */}
-            <div className="pl-4 py-2">
+            <div className="px-4 py-2">
               <div
                 className={cn(
-                  "flex items-center gap-2 w-full text-white",
+                  "flex items-center gap-2 w-full text-foreground",
                   isHovered || isOpen ? "opacity-100" : "opacity-0 pointer-events-none",
                   "transition-opacity"
                 )}
               >
-                <ThemeToggle variant="sidebar" />
+                <ThemeToggle />
                 <div className="h-6 w-px bg-white/20" />
-                <LanguageSwitcher variant="sidebar" />
+                <LanguageSwitcher />
               </div>
             </div>
 
             {/* Logout */}
-            <div className="pl-4 pr-4 py-1.5">
+            <div className="px-4 py-1.5">
               <button
                 onClick={() => {
                   setIsOpen(false);
                   handleSignOut();
                 }}
                 className={cn(
-                  "grid h-9 w-full grid-cols-[24px_1fr] items-center rounded-md text-sm text-white",
+                  "grid h-9 w-full grid-cols-[24px_1fr] items-center rounded-md text-sm text-foreground",
                   "hover:bg-white/10"
                 )}
               >
-                <LogOutIcon size={18} className="text-white" />
+                <LogOutIcon size={18} className="text-foreground" />
                 <span
                   className={cn(
                     "whitespace-nowrap transition-all",
