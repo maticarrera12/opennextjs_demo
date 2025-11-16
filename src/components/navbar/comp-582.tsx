@@ -33,6 +33,11 @@ export default function Navbar() {
       return path;
     }
 
+    // /docs no debe tener locale
+    if (path === "/docs" || path.startsWith("/docs/")) {
+      return path;
+    }
+
     if (path === "/") {
       return `/${locale}`;
     }
@@ -75,7 +80,12 @@ export default function Navbar() {
     // Si no tiene scrollTo, navegar respetando el locale actual
     if (link.href.startsWith("/")) {
       e.preventDefault();
-      push(link.href);
+      // /docs no debe usar locale
+      if (link.href === "/docs" || link.href.startsWith("/docs/")) {
+        window.location.href = link.href;
+      } else {
+        push(link.href);
+      }
     }
   };
 

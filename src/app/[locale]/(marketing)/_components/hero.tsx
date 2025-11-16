@@ -1,12 +1,10 @@
 "use client";
 
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRight02Icon } from "hugeicons-react";
+import NextLink from "next/link";
 import { useTranslations } from "next-intl";
 
 import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
-import { Link } from "@/i18n/routing";
-
-// import Image from "next/image";
 
 const Hero = () => {
   const t = useTranslations("hero");
@@ -37,13 +35,13 @@ const Hero = () => {
                 delay={0.2}
               />
 
-              <Link
+              <NextLink
                 href="/docs"
                 className="group flex items-center gap-2 h-14 px-8 rounded-md bg-transparent text-foreground transition-all duration-200 hover:-translate-y-1"
               >
                 <span>Docs</span>
-                <ArrowRightIcon size={20} />
-              </Link>
+                <ArrowRight02Icon />
+              </NextLink>
             </div>
           </div>
 

@@ -1,9 +1,14 @@
 "use client";
-import { LayoutDashboardIcon, UsersIcon, DollarSignIcon, SparklesIcon } from "lucide-react";
+
+import {
+  Analytics01Icon,
+  DashboardSquare02Icon,
+  Dollar01Icon,
+  SparklesIcon,
+} from "hugeicons-react";
 import { useTranslations } from "next-intl";
 
-import AppSidebar from "@/components/ui/app-sidebar";
-
+import AppSidebar, { SidebarSection } from "@/components/ui/app-sidebar";
 export default function AdminSidebar() {
   const t = useTranslations("admin");
 
@@ -14,17 +19,17 @@ export default function AdminSidebar() {
         {
           name: t("menu.overview"),
           href: "/dashboard",
-          icon: LayoutDashboardIcon,
+          icon: DashboardSquare02Icon,
         },
         {
           name: t("menu.usersAnalytics"),
           href: "/dashboard/users",
-          icon: UsersIcon,
+          icon: Analytics01Icon,
         },
         {
           name: t("menu.revenueBilling"),
           href: "/dashboard/revenue",
-          icon: DollarSignIcon,
+          icon: Dollar01Icon,
         },
         {
           name: t("menu.productUsage"),
@@ -36,6 +41,10 @@ export default function AdminSidebar() {
   ];
 
   return (
-    <AppSidebar title={t("title")} sections={sidebarSections} logoutLabel={t("menu.logout")} />
+    <AppSidebar
+      title={t("title")}
+      sections={sidebarSections as SidebarSection[]}
+      logoutLabel={t("menu.logout")}
+    />
   );
 }

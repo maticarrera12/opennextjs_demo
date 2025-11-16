@@ -1,6 +1,6 @@
 "use client";
 
-import { MoonIcon, SunIcon } from "lucide-react";
+import { Moon01Icon, Sun02Icon } from "hugeicons-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
@@ -29,7 +29,7 @@ export default function ThemeToggle({ variant = "default" }: ThemeToggleProps) {
         aria-label="Toggle theme"
         disabled
       >
-        <SunIcon
+        <Sun02Icon
           size={16}
           className={variant === "sidebar" ? "opacity-80 text-white" : "opacity-50"}
         />
@@ -62,8 +62,8 @@ export default function ThemeToggle({ variant = "default" }: ThemeToggleProps) {
       onPressedChange={() => setTheme(isDark ? "light" : "dark")}
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
     >
-      <MoonIcon size={16} className={moonClassName} aria-hidden="true" />
-      <SunIcon size={16} className={sunClassName} aria-hidden="true" />
+      <Moon01Icon size={16} className={moonClassName} aria-hidden="true" />
+      <Sun02Icon size={16} className={sunClassName} aria-hidden="true" />
     </Toggle>
   );
 }

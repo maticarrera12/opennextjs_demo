@@ -1,8 +1,15 @@
 "use client";
-import { UserIcon, LockIcon, CreditCardIcon, KeyIcon, UsersIcon } from "lucide-react";
+import {
+  CreditCardPosIcon,
+  SquareLockPasswordIcon,
+  UserAdd02Icon,
+  UserGroupIcon,
+  UserIcon,
+} from "hugeicons-react";
+import { KeyIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import AppSidebar from "@/components/ui/app-sidebar";
+import AppSidebar, { SidebarSection } from "@/components/ui/app-sidebar";
 
 export default function SettingsSidebar() {
   const t = useTranslations("settings");
@@ -19,7 +26,7 @@ export default function SettingsSidebar() {
         {
           name: t("menu.security"),
           href: "/settings/account/security",
-          icon: LockIcon,
+          icon: SquareLockPasswordIcon,
         },
       ],
     },
@@ -29,7 +36,7 @@ export default function SettingsSidebar() {
         {
           name: t("menu.planPayments"),
           href: "/settings/billing",
-          icon: CreditCardIcon,
+          icon: CreditCardPosIcon,
         },
       ],
     },
@@ -43,18 +50,22 @@ export default function SettingsSidebar() {
         {
           name: t("menu.members"),
           href: "/settings/organization/members",
-          icon: UsersIcon,
+          icon: UserGroupIcon,
         },
         {
           name: t("menu.invitations"),
           href: "/settings/organization/invites",
-          icon: UsersIcon,
+          icon: UserAdd02Icon,
         },
       ],
     },
   ];
 
   return (
-    <AppSidebar title={t("title")} sections={sidebarSections} logoutLabel={t("menu.logout")} />
+    <AppSidebar
+      title={t("title")}
+      sections={sidebarSections as SidebarSection[]}
+      logoutLabel={t("menu.logout")}
+    />
   );
 }

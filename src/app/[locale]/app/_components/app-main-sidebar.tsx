@@ -1,15 +1,11 @@
 "use client";
-import {
-  LayoutDashboardIcon,
-  PlusCircleIcon,
-  FolderIcon,
-  StarIcon,
-  SettingsIcon,
-} from "lucide-react";
+
+import { Archive02Icon, Configuration01Icon, SparklesIcon, StarIcon } from "hugeicons-react";
+import { LayoutDashboardIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { CreditBalance } from "@/components/credits/credits-balance";
-import AppSidebar from "@/components/ui/app-sidebar";
+import AppSidebar, { SidebarSection } from "@/components/ui/app-sidebar";
 
 export default function AppMainSidebar() {
   const t = useTranslations("app");
@@ -26,12 +22,12 @@ export default function AppMainSidebar() {
         {
           name: t("menu.createBrand"),
           href: "/app/create-brand",
-          icon: PlusCircleIcon,
+          icon: SparklesIcon,
         },
         {
           name: t("menu.myBrands"),
           href: "/app/brands",
-          icon: FolderIcon,
+          icon: Archive02Icon,
           matchPrefixes: ["/app/brands"],
         },
         {
@@ -47,7 +43,7 @@ export default function AppMainSidebar() {
         {
           name: t("menu.settings"),
           href: "/settings/account/profile",
-          icon: SettingsIcon,
+          icon: Configuration01Icon,
           matchPrefixes: ["/app/settings"],
         },
       ],
@@ -57,7 +53,7 @@ export default function AppMainSidebar() {
   return (
     <AppSidebar
       title={t("title")}
-      sections={sidebarSections}
+      sections={sidebarSections as SidebarSection[]}
       logoutLabel={t("menu.logout")}
       topContent={<CreditBalance />}
       topContentHeightClass="h-44"

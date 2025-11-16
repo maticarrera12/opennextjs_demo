@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, Boxes, Sparkles } from "lucide-react";
+import { Archive02Icon, Notification01Icon, SparklesIcon } from "hugeicons-react";
 import { useTranslations } from "next-intl";
 
 import UserMenu from "../navbar/user-menu";
@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <header className="mx-auto mt-10 w-full max-w-6xl px-4 md:px-6">
       <div className="flex items-center justify-between gap-4">
-        <div className="flex flex-1 items-center justify-between">
+        <div className="hidden md:flex flex-1 items-center justify-between">
           <div className="flex items-center gap-2 rounded-full border p-1">
             <div>
               <UserMenu />
@@ -38,14 +38,14 @@ const Header = () => {
                 className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition hover:bg-muted hover:text-foreground"
                 aria-label={t("savedAssetsAria")}
               >
-                <Boxes className="size-4" />
+                <Archive02Icon className="size-4" />
               </Link>
               <Link
                 href="/app/create-brand"
                 className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition hover:bg-muted hover:text-foreground"
                 aria-label={t("generateAiAria")}
               >
-                <Sparkles className="size-4" />
+                <SparklesIcon className="size-4" />
               </Link>
             </div>
           </div>
@@ -65,7 +65,7 @@ const Header = () => {
         <div className="flex items-center gap-3 rounded-full border border-gray-300 dark:border-neutral-700 px-1 py-1 shadow-sm">
           {/* Icon circle */}
           <div className="flex items-center justify-center w-9 h-9 rounded-full  dark:bg-neutral-800">
-            <Bell className="w-4 h-4 text-neutral-700 dark:text-neutral-200" />
+            <Notification01Icon className="w-4 h-4 text-neutral-700 dark:text-neutral-200" />
           </div>
 
           {/* Date */}

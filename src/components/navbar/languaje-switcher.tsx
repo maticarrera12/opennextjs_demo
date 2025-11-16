@@ -1,6 +1,6 @@
 "use client";
 
-import { GlobeIcon } from "lucide-react";
+import { LanguageSquareIcon } from "hugeicons-react";
 import React from "react";
 
 import {
@@ -40,8 +40,8 @@ export function LanguageSwitcher({ variant = "default" }: LanguageSwitcherProps)
         )}
         aria-label="Select language"
       >
-        <GlobeIcon
-          size={16}
+        <LanguageSquareIcon
+          size={24}
           aria-hidden="true"
           className={variant === "sidebar" ? "text-white" : undefined}
         />

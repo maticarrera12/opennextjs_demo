@@ -1,7 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, CreditCard, Cloud, Globe } from "lucide-react";
+import {
+  CloudUploadIcon,
+  CreditCardIcon,
+  LanguageSquareIcon,
+  SecurityValidationIcon,
+} from "hugeicons-react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -10,25 +15,25 @@ const items = [
     title: "Authentication",
     desc: "Plug & Play auth with Better Auth. Supports Email, OAuth, and Magic Links.",
     img: "https://picsum.photos/800/600?random=1",
-    icon: ShieldCheck,
+    icon: SecurityValidationIcon,
   },
   {
     title: "Payments",
     desc: "Stripe & Lemon Squeezy integration. Subscriptions and billing ready.",
     img: "https://picsum.photos/800/600?random=2",
-    icon: CreditCard,
+    icon: CreditCardIcon,
   },
   {
     title: "Storage",
     desc: "Upload files with Vercel Blob or Cloudinary. Optimized image management.",
     img: "https://picsum.photos/800/600?random=3",
-    icon: Cloud,
+    icon: CloudUploadIcon,
   },
   {
     title: "Internationalization",
     desc: "Multi-language support with next-intl. Built-in i18n routing.",
     img: "https://picsum.photos/800/600?random=4",
-    icon: Globe,
+    icon: LanguageSquareIcon,
   },
 ];
 

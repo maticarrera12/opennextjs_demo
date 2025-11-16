@@ -35,9 +35,9 @@ const layout = async ({ children, params }: any) => {
   }
 
   return (
-    <div className="flex min-h-screen bg-primary">
+    <div className="flex min-h-screen bg-card">
       <AdminSidebar />
-      <main className="flex-1 overflow-y-auto border-t border-border bg-background pt-14 md:pt-0">
+      <main className="flex-1 mr-6 my-6 rounded-lg overflow-y-auto bg-background pt-14 md:pt-0">
         <div className="mx-auto max-w-7xl p-6 md:p-10">{children}</div>
       </main>
     </div>

@@ -1,6 +1,12 @@
 "use client";
 
-import { ShieldCheck, CreditCard, Cloud, LayoutDashboard, Brain } from "lucide-react";
+import {
+  AiBrain03Icon,
+  CloudUploadIcon,
+  CreditCardIcon,
+  DashboardSquare02Icon,
+  SecurityValidationIcon,
+} from "hugeicons-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 
@@ -15,11 +21,11 @@ export function FeatureTabs() {
       {/* TAB LIST */}
       <TabsList className="flex w-full justify-between bg-card/60 backdrop-blur-md py-8 px-2 rounded-full border border-border">
         {[
-          { value: "auth", label: t("tabs.auth"), icon: ShieldCheck },
-          { value: "payments", label: t("tabs.payments"), icon: CreditCard },
-          { value: "storage", label: t("tabs.storage"), icon: Cloud },
-          { value: "admin", label: t("tabs.admin"), icon: LayoutDashboard },
-          { value: "ai", label: t("tabs.ai"), icon: Brain },
+          { value: "auth", label: t("tabs.auth"), icon: SecurityValidationIcon },
+          { value: "payments", label: t("tabs.payments"), icon: CreditCardIcon },
+          { value: "storage", label: t("tabs.storage"), icon: CloudUploadIcon },
+          { value: "admin", label: t("tabs.admin"), icon: DashboardSquare02Icon },
+          { value: "ai", label: t("tabs.ai"), icon: AiBrain03Icon },
         ].map((tab) => {
           const Icon = tab.icon;
           return (
@@ -40,7 +46,7 @@ export function FeatureTabs() {
       {/* AUTH */}
       <TabsContent value="auth">
         <FeatureCard
-          icon={ShieldCheck}
+          icon={SecurityValidationIcon}
           title={t("auth.title")}
           items={t.raw("auth.items") as string[]}
         />
@@ -49,7 +55,7 @@ export function FeatureTabs() {
       {/* PAYMENTS */}
       <TabsContent value="payments">
         <FeatureCard
-          icon={CreditCard}
+          icon={CreditCardIcon}
           title={t("payments.title")}
           items={t.raw("payments.items") as string[]}
         />
@@ -58,7 +64,7 @@ export function FeatureTabs() {
       {/* STORAGE */}
       <TabsContent value="storage">
         <FeatureCard
-          icon={Cloud}
+          icon={CloudUploadIcon}
           title={t("storage.title")}
           items={t.raw("storage.items") as string[]}
         />
@@ -67,7 +73,7 @@ export function FeatureTabs() {
       {/* ADMIN DASHBOARD */}
       <TabsContent value="admin">
         <FeatureCard
-          icon={LayoutDashboard}
+          icon={DashboardSquare02Icon}
           title={t("admin.title")}
           items={t.raw("admin.items") as string[]}
         />
@@ -75,7 +81,11 @@ export function FeatureTabs() {
 
       {/* AI */}
       <TabsContent value="ai">
-        <FeatureCard icon={Brain} title={t("ai.title")} items={t.raw("ai.items") as string[]} />
+        <FeatureCard
+          icon={AiBrain03Icon}
+          title={t("ai.title")}
+          items={t.raw("ai.items") as string[]}
+        />
       </TabsContent>
     </Tabs>
   );
