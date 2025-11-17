@@ -2,9 +2,12 @@ import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
 
-export async function PUT(req: Request, context: { params: { plan: string; interval: string } }) {
+export async function PUT(
+  req: Request,
+  context: { params: Promise<{ plan: string; interval: string }> }
+) {
   try {
-    const { plan, interval } = context.params;
+    const { plan, interval } = await context.params;
     const body = await req.json();
 
     const updated = await prisma.planLimit.update({
