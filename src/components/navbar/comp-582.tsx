@@ -117,7 +117,7 @@ export default function Navbar() {
             : "bg-background/0 border-transparent"
         )}
       >
-        <div className="mx-auto px-4 md:px-6">
+        <div className="mx-auto px-4 md:px-6 max-w-6xl">
           <div className="flex h-16 items-center justify-between gap-4">
             <div className="flex flex-1 items-center gap-2">
               <Button
