@@ -1,6 +1,6 @@
-import { type PlanType, type PlanInterval } from "@prisma/client";
 import { NextResponse } from "next/server";
 
+import { type PlanType, type PlanInterval } from "@/generated/client/client";
 import { prisma } from "@/lib/prisma";
 
 export async function PATCH(

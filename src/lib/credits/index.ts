@@ -1,8 +1,6 @@
-// lib/credits/index.ts
-import type { CreditTransactionType, Prisma } from "@prisma/client";
-
 import { prisma } from "../prisma";
 import { PLANS } from "./constants";
+import type { CreditTransactionType, Prisma } from "@/generated/client/client";
 
 export class CreditService {
   // Check if user has enough credits

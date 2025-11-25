@@ -1,3 +1,7 @@
+import { PrismaPg } from "@prisma/adapter-pg";
+import dotenv from "dotenv";
+import { Pool } from "pg";
+
 import {
   PrismaClient,
   PlanType,
@@ -5,9 +9,18 @@ import {
   AssetType,
   AssetStatus,
   CreditTransactionType,
-} from "@prisma/client";
+} from "@/generated/client/client";
 
-const prisma = new PrismaClient();
+dotenv.config();
+
+const connectionString = process.env.DATABASE_URL;
+
+// 4. Configurar el adaptador
+const pool = new Pool({ connectionString });
+const adapter = new PrismaPg(pool);
+
+// 5. Instanciar Prisma pasando el adaptador (Esto soluciona el error de "Expected 1 argument")
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
   console.log("🌱 Starting full brandkit seed...");

@@ -24,7 +24,7 @@ const geistMono = Geist_Mono({
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
   subsets: ["latin"],
-  weight: ["400"], // Solo existe 400
+  weight: ["400"],
   style: ["normal", "italic"],
 });
 
