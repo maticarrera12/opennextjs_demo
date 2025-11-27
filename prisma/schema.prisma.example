@@ -1,0 +1,342 @@
+// ============================================
+// PRISMA SCHEMA - SAAS BOILERPLATE CORE
+// ============================================
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================
+// 1. BETTER AUTH MODELS (CORE IDENTITY)
+// ============================================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  theme         String?   @default("system")
+  language      String?   @default("en")
+  banned        Boolean   @default(false)
+  
+  // Auth Security
+  role          String    @default("user") // Global role (e.g. "superadmin")
+  
+  // Relations
+  sessions      Session[]
+  accounts      Account[]
+  members       Member[]     // Membership in Organizations
+  invitations   Invitation[] // Received invitations
+  
+  // ============================================
+  // SAAS CORE: BILLING & LIMITS
+  // ============================================
+  
+  // Subscription State
+  plan          PlanType    @default(FREE)
+  planStatus    PlanStatus  @default(ACTIVE)
+
+  // Credits System (Wallet)
+  credits         Int   @default(0)       // Current balance
+  lifetimeCredits Int   @default(0)       // Total accrued
+  
+  // Billing Provider IDs
+  stripeCustomerId       String?   @unique
+  lemonSqueezyCustomerId String?   @unique
+  subscriptionId         String?   @unique // Provider's sub ID
+  
+  // Billing Period Tracking
+  currentPeriodStart     DateTime?
+  currentPeriodEnd       DateTime?
+  cancelAtPeriodEnd      Boolean   @default(false)
+
+  // Generic History
+  creditHistory CreditTransaction[]
+  purchases     Purchase[]
+
+  // ============================================
+  // ⬇️ APP SPECIFIC: ADD YOUR RELATIONS HERE ⬇️
+  // ============================================
+  // e.g., posts Post[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([plan])
+  @@index([stripeCustomerId])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  impersonatedBy String?
+  
+  // UX Hook: Remembers the last org the user visited
+  activeOrganizationId String? 
+  
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id @default(cuid())
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("verification")
+}
+
+// ============================================
+// 2. ORGANIZATION SYSTEM (MULTI-TENANCY)
+// ============================================
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  logo      String?
+  
+  // Metadata for org-specific settings (branding, timezone, etc.)
+  metadata  Json?
+  
+  members      Member[]
+  invitations  Invitation[]
+  
+  // ============================================
+  // ⬇️ APP SPECIFIC: ADD YOUR RELATIONS HERE ⬇️
+  // ============================================
+  // e.g., projects Project[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+  @@map("organization")
+}
+
+model Member {
+  id             String       @id @default(cuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  role           String       @default("member") // owner, admin, member
+  
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([organizationId, userId])
+  @@index([userId])
+  @@index([organizationId])
+  @@map("member")
+}
+
+model Invitation {
+  id             String       @id @default(cuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  email          String
+  role           String?      @default("member")
+  status         String       @default("pending") // pending, accepted, rejected
+  expiresAt      DateTime
+  inviterId      String
+  user           User         @relation(fields: [inviterId], references: [id], onDelete: Cascade)
+  
+  createdAt      DateTime     @default(now())
+  
+  @@map("invitation")
+}
+
+// ============================================
+// 3. AGNOSTIC CREDITS & BILLING SYSTEM
+// ============================================
+
+model CreditTransaction {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Optional: Group transactions (e.g. multiple actions in one batch)
+  transactionGroupId String?
+
+  type        CreditTransactionType
+  amount      Int      // +/- Value
+  balance     Int      // Snapshot of balance after transaction
+
+  reason      String   // Human readable reason ("Generated Report", "Monthly Top-up")
+  description String?
+
+  // 🔥 AGNOSTIC LINKING:
+  // Instead of hard-coding relation to "BrandAsset", we use generic references.
+  resourceId   String?  // ID of the thing being paid for (Project ID, File ID, etc)
+  resourceType String?  // Type identifier (e.g., "GENERATED_PDF", "API_CALL")
+
+  // Link to a purchase if this was a credit pack buy
+  purchaseId  String?
+  purchase    Purchase? @relation(fields: [purchaseId], references: [id])
+
+  metadata    Json?
+
+  createdAt   DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([type])
+  @@index([resourceId])
+}
+
+model Purchase {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type        PurchaseType
+  provider    SubscriptionProvider
+
+  plan        PlanType?
+  credits     Int?
+
+  amount      Int
+  currency    String       @default("usd")
+
+  // Provider Data
+  providerCustomerId     String
+  providerPaymentId      String
+  providerSubscriptionId String?
+  providerProductId      String?
+
+  status      PurchaseStatus
+  metadata    Json?
+
+  creditTransactions CreditTransaction[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([provider, providerPaymentId])
+  @@index([userId])
+  @@index([provider])
+  @@index([status])
+}
+
+// ============================================
+// 4. SAAS CONFIGURATION & GROWTH
+// ============================================
+
+model PlanLimit {
+  id          String   @id @default(cuid())
+  plan        PlanType
+  interval    PlanInterval @default(MONTHLY)
+
+  // Core Limits
+  monthlyCredits       Int
+  
+  // Dynamic feature flags/limits
+  // e.g. { "max_projects": 5, "can_export_csv": true }
+  features    Json
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([plan, interval])
+}
+
+model WaitlistUser {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  referralCode  String   @unique
+  referredById  String?
+  referredBy    WaitlistUser? @relation("Referrals", fields: [referredById], references: [id])
+  referrals     WaitlistUser[] @relation("Referrals")
+  invited       Boolean  @default(false)
+  createdAt     DateTime @default(now())
+}
+
+// ============================================
+// 5. ENUMS
+// ============================================
+
+enum PlanType {
+  FREE    
+  PRO     
+  BUSINESS 
+}
+
+enum PlanStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  TRIALING
+  PAUSED
+}
+
+enum PlanInterval {
+  MONTHLY
+  YEARLY
+}
+
+enum SubscriptionProvider {
+  STRIPE
+  LEMONSQUEEZY
+}
+
+enum CreditTransactionType {
+  DEDUCTION
+  REFUND
+  PURCHASE
+  SUBSCRIPTION
+  BONUS
+  ADMIN_ADJUSTMENT
+}
+
+enum PurchaseType {
+  SUBSCRIPTION
+  CREDIT_PACK
+  UPGRADE
+}
+
+enum PurchaseStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+  CANCELED
+}

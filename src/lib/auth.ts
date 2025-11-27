@@ -122,8 +122,57 @@ export const auth = betterAuth({
           invitation,
         });
       },
+      async onActiveOrganizationChange({
+        session,
+        activeOrganizationId,
+      }: {
+        session: any;
+        activeOrganizationId: any;
+      }) {
+        if (!session?.userId || !activeOrganizationId) return;
+
+        try {
+          await prisma.member.update({
+            where: {
+              organizationId_userId: {
+                organizationId: activeOrganizationId,
+                userId: session.userId,
+              },
+            },
+            data: {
+              updatedAt: new Date(),
+            },
+          });
+        } catch (error) {
+          console.error("Error updating member activity:", error);
+        }
+      },
     }),
   ],
+  callbacks: {
+    session: async ({ session, user }: { session: any; user: any }) => {
+      const activeOrgId = session.activeOrganizationId;
+      if (!activeOrgId) return session;
+
+      const member = await prisma.member.findUnique({
+        where: {
+          organizationId_userId: {
+            organizationId: activeOrgId,
+            userId: user.id,
+          },
+        },
+        select: { role: true },
+      });
+
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          orgRole: member?.role || "member",
+        },
+      };
+    },
+  },
   databaseHooks: {
     session: {
       create: {
