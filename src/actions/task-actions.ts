@@ -74,7 +74,7 @@ export async function createTask(data: {
       priority: data.priority || "medium",
       dueDate: data.dueDate,
       description: data.description || null,
-      tags: data.tags || null,
+      tags: data.tags ?? undefined,
       image: data.image || null,
       order: newOrder,
       userId: session.user.id,
