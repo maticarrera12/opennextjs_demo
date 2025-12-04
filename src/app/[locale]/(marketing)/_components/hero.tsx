@@ -1,10 +1,10 @@
 "use client";
 
 import { ArrowRight02Icon, StarIcon, CreditCardIcon, ChartAverageIcon } from "hugeicons-react";
-import NextLink from "next/link";
 import { useTranslations } from "next-intl";
 
 import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
+import { Link } from "@/i18n/routing";
 
 const Hero = () => {
   const t = useTranslations("hero");
@@ -66,13 +66,13 @@ const Hero = () => {
                 />
               </div>
 
-              <NextLink
+              <Link
                 href="/docs"
                 className="group flex items-center gap-2 h-14 px-8 rounded-full border border-border/60 bg-white/50 dark:bg-white/5 hover:bg-muted text-foreground transition-all duration-300 hover:scale-105"
               >
                 <span className="font-medium">Documentation</span>
                 <ArrowRight02Icon className="w-5 h-5 text-primary transition-transform group-hover:translate-x-1" />
-              </NextLink>
+              </Link>
             </div>
           </div>
 

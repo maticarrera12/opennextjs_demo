@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
+    "postinstall": "prisma generate",
     "email": "react-email dev",
     "start": "next start",
     "lint": "eslint",

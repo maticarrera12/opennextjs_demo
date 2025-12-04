@@ -434,5 +434,52 @@
     "subtitle": "Welcome to OpenNextJS",
     "savedAssetsAria": "View saved assets",
     "generateAiAria": "Generate with AI"
+  },
+  "docs": {
+    "index": {
+      "title": "Welcome to Documentation",
+      "welcome": "Welcome to your project documentation powered by Nextra.",
+      "gettingStartedSection": "Getting Started",
+      "gettingStartedDescription": "Get started by exploring the documentation sections in the sidebar.",
+      "features": "Features",
+      "featuresMdx": "Write documentation in MDX",
+      "featuresTheme": "Beautiful default theme",
+      "featuresSearch": "Built-in search",
+      "featuresMobile": "Mobile responsive",
+      "featuresDark": "Dark mode support",
+      "quickLinks": "Quick Links"
+    },
+    "gettingStarted": {
+      "title": "Getting Started",
+      "description": "Learn how to configure and run your application.",
+      "prerequisites": "Prerequisites",
+      "prerequisitesList": "Before you begin, make sure you have installed:",
+      "nodeVersion": "Node.js 18.x or higher",
+      "npmOrPnpm": "npm, pnpm or yarn",
+      "gitInstalled": "Git installed",
+      "installation": "Installation",
+      "installSteps": "Follow these steps to install dependencies:",
+      "cloneRepo": "1. Clone the repository",
+      "enterFolder": "2. Enter the project folder",
+      "installDeps": "3. Install dependencies",
+      "configuration": "Configuration",
+      "configSteps": "Copy the example environment variables file:",
+      "configDescription": "Then edit the .env.local file with your own credentials:",
+      "runDev": "Run Development Server",
+      "runDevSteps": "Start the server in development mode:",
+      "visitUrl": "Visit {url} to see your application.",
+      "nextSteps": "Next Steps",
+      "nextStepsDescription": "Now that you have the project running, you can:",
+      "exploreCode": "Explore the code structure",
+      "readApiDocs": "Read the API documentation",
+      "customizeTheme": "Customize the theme and styles"
+    },
+    "apiReference": {
+      "title": "API Reference",
+      "description": "Complete API documentation.",
+      "endpoints": "Endpoints",
+      "auth": "Authentication",
+      "users": "Users"
+    }
   }
 }

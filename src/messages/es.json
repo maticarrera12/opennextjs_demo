@@ -434,5 +434,52 @@
     "subtitle": "Bienvenido a OpenNextJS",
     "savedAssetsAria": "Ver recursos guardados",
     "generateAiAria": "Generar con IA"
+  },
+  "docs": {
+    "index": {
+      "title": "Bienvenido a la Documentación",
+      "welcome": "Bienvenido a la documentación de tu proyecto impulsada por Nextra.",
+      "gettingStartedSection": "Comenzando",
+      "gettingStartedDescription": "Comienza explorando las secciones de documentación en la barra lateral.",
+      "features": "Características",
+      "featuresMdx": "Escribe documentación en MDX",
+      "featuresTheme": "Hermoso tema por defecto",
+      "featuresSearch": "Búsqueda integrada",
+      "featuresMobile": "Responsive para móviles",
+      "featuresDark": "Soporte para modo oscuro",
+      "quickLinks": "Enlaces Rápidos"
+    },
+    "gettingStarted": {
+      "title": "Comenzando",
+      "description": "Aprende a configurar y ejecutar tu aplicación.",
+      "prerequisites": "Prerrequisitos",
+      "prerequisitesList": "Antes de comenzar, asegúrate de tener instalado:",
+      "nodeVersion": "Node.js 18.x o superior",
+      "npmOrPnpm": "npm, pnpm o yarn",
+      "gitInstalled": "Git instalado",
+      "installation": "Instalación",
+      "installSteps": "Sigue estos pasos para instalar las dependencias:",
+      "cloneRepo": "1. Clonar el repositorio",
+      "enterFolder": "2. Entrar a la carpeta del proyecto",
+      "installDeps": "3. Instalar dependencias",
+      "configuration": "Configuración",
+      "configSteps": "Copia el archivo de variables de entorno de ejemplo:",
+      "configDescription": "Luego edita el archivo .env.local con tus propias credenciales:",
+      "runDev": "Ejecutar el servidor de desarrollo",
+      "runDevSteps": "Inicia el servidor en modo desarrollo:",
+      "visitUrl": "Visita {url} para ver tu aplicación.",
+      "nextSteps": "Siguientes pasos",
+      "nextStepsDescription": "Ahora que tienes el proyecto corriendo, puedes:",
+      "exploreCode": "Explorar la estructura del código",
+      "readApiDocs": "Leer la documentación de la API",
+      "customizeTheme": "Personalizar el tema y estilos"
+    },
+    "apiReference": {
+      "title": "Referencia de API",
+      "description": "Documentación completa de la API.",
+      "endpoints": "Endpoints",
+      "auth": "Autenticación",
+      "users": "Usuarios"
+    }
   }
 }

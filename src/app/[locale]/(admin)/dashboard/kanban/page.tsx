@@ -2,7 +2,7 @@ import { headers } from "next/headers";
 import React from "react";
 
 import KanbanBoard from "./_components/kanban-board";
-import PageBreadcrumb from "../../../_components/page-bread-crumb";
+import PageBreadcrumb from "../../_components/page-bread-crumb";
 import { getColumns } from "@/actions/column-actions";
 import { getTasks } from "@/actions/task-actions";
 import { auth } from "@/lib/auth";

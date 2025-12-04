@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { BookOpen01Icon, Home12Icon, SaleTag01Icon } from "hugeicons-react";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
 import { LanguageSwitcher } from "@/components/navbar/languaje-switcher";
@@ -61,6 +62,10 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { locale, push } = useLocaleRouting();
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  // Check if we're on the home page
+  const isHomePage = pathname === `/${locale}` || pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -70,7 +75,7 @@ export default function Navbar() {
 
   const getLocalizedPath = (path: string) => {
     if (!path.startsWith("/")) return path;
-    if (path === "/docs" || path.startsWith("/docs/")) return path;
+    if (path === "/docs" || path.startsWith("/docs/")) return `/${locale}/docs`;
     if (path === "/") return `/${locale}`;
     return `/${locale}${path}`;
   };
@@ -81,8 +86,22 @@ export default function Navbar() {
   ) => {
     setIsMobileMenuOpen(false);
 
+    // If link has scrollTo behavior
     if (link.scrollTo) {
       e.preventDefault();
+
+      // If we're not on the home page, navigate there first
+      if (!isHomePage) {
+        // Navigate to home page with hash for scroll target
+        if (link.scrollTo === "top") {
+          window.location.href = `/${locale}`;
+        } else {
+          window.location.href = `/${locale}#${link.scrollTo}`;
+        }
+        return;
+      }
+
+      // We're on the home page, just scroll
       if (link.scrollTo === "top") {
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
@@ -100,7 +119,7 @@ export default function Navbar() {
     if (link.href.startsWith("/")) {
       e.preventDefault();
       if (link.href === "/docs" || link.href.startsWith("/docs/")) {
-        window.location.href = link.href;
+        window.location.href = `/${locale}/docs`;
       } else {
         push(link.href);
       }
