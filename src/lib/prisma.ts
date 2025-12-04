@@ -3,7 +3,7 @@ import pg from "pg";
 
 import { PrismaClient } from "@/generated/client/client";
 
-const globalForPrisma = globalThis as unknown as { prismaClient: PrismaClient };
+const globalForPrisma = globalThis as unknown as { prismaClientV2: PrismaClient };
 
 const createPrismaClient = () => {
   const connectionString = process.env.DATABASE_URL!;
@@ -12,6 +12,6 @@ const createPrismaClient = () => {
   return new PrismaClient({ adapter });
 };
 
-export const prisma = globalForPrisma.prismaClient ?? createPrismaClient();
+export const prisma = globalForPrisma.prismaClientV2 ?? createPrismaClient();
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prismaClient = prisma;
+if (process.env.NODE_ENV !== "production") globalForPrisma.prismaClientV2 = prisma;

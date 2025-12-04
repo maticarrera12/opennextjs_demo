@@ -65,7 +65,8 @@ export const ModelName = {
   PlanLimit: 'PlanLimit',
   WaitlistUser: 'WaitlistUser',
   KanbanColumn: 'KanbanColumn',
-  Task: 'Task'
+  Task: 'Task',
+  CalendarEvent: 'CalendarEvent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -344,6 +345,21 @@ export const TaskScalarFieldEnum = {
 } as const
 
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
+
+
+export const CalendarEventScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  start: 'start',
+  end: 'end',
+  allDay: 'allDay',
+  level: 'level',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CalendarEventScalarFieldEnum = (typeof CalendarEventScalarFieldEnum)[keyof typeof CalendarEventScalarFieldEnum]
 
 
 export const SortOrder = {

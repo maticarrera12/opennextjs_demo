@@ -92,3 +92,8 @@ export type KanbanColumn = Prisma.KanbanColumnModel
  * 
  */
 export type Task = Prisma.TaskModel
+/**
+ * Model CalendarEvent
+ * 
+ */
+export type CalendarEvent = Prisma.CalendarEventModel

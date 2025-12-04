@@ -390,6 +390,7 @@ export type UserWhereInput = {
   purchases?: Prisma.PurchaseListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
   kanbanColumns?: Prisma.KanbanColumnListRelationFilter
+  calendarEvents?: Prisma.CalendarEventListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -428,6 +429,7 @@ export type UserOrderByWithRelationInput = {
   purchases?: Prisma.PurchaseOrderByRelationAggregateInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
   kanbanColumns?: Prisma.KanbanColumnOrderByRelationAggregateInput
+  calendarEvents?: Prisma.CalendarEventOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -469,6 +471,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   purchases?: Prisma.PurchaseListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
   kanbanColumns?: Prisma.KanbanColumnListRelationFilter
+  calendarEvents?: Prisma.CalendarEventListRelationFilter
 }, "id" | "email" | "subscriptionId" | "stripeCustomerId" | "lemonSqueezyCustomerId">
 
 export type UserOrderByWithAggregationInput = {
@@ -571,6 +574,7 @@ export type UserCreateInput = {
   purchases?: Prisma.PurchaseCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -609,6 +613,7 @@ export type UserUncheckedCreateInput = {
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -647,6 +652,7 @@ export type UserUpdateInput = {
   purchases?: Prisma.PurchaseUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -685,6 +691,7 @@ export type UserUncheckedUpdateInput = {
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1050,6 +1057,20 @@ export type UserUpdateOneRequiredWithoutTasksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTasksInput, Prisma.UserUpdateWithoutTasksInput>, Prisma.UserUncheckedUpdateWithoutTasksInput>
 }
 
+export type UserCreateNestedOneWithoutCalendarEventsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCalendarEventsInput, Prisma.UserUncheckedCreateWithoutCalendarEventsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCalendarEventsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCalendarEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCalendarEventsInput, Prisma.UserUncheckedCreateWithoutCalendarEventsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCalendarEventsInput
+  upsert?: Prisma.UserUpsertWithoutCalendarEventsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCalendarEventsInput, Prisma.UserUpdateWithoutCalendarEventsInput>, Prisma.UserUncheckedUpdateWithoutCalendarEventsInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id?: string
   name: string
@@ -1085,6 +1106,7 @@ export type UserCreateWithoutSessionsInput = {
   purchases?: Prisma.PurchaseCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1122,6 +1144,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1175,6 +1198,7 @@ export type UserUpdateWithoutSessionsInput = {
   purchases?: Prisma.PurchaseUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1212,6 +1236,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -1249,6 +1274,7 @@ export type UserCreateWithoutAccountsInput = {
   purchases?: Prisma.PurchaseCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -1286,6 +1312,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -1339,6 +1366,7 @@ export type UserUpdateWithoutAccountsInput = {
   purchases?: Prisma.PurchaseUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -1376,6 +1404,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMembersInput = {
@@ -1413,6 +1442,7 @@ export type UserCreateWithoutMembersInput = {
   purchases?: Prisma.PurchaseCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMembersInput = {
@@ -1450,6 +1480,7 @@ export type UserUncheckedCreateWithoutMembersInput = {
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMembersInput = {
@@ -1503,6 +1534,7 @@ export type UserUpdateWithoutMembersInput = {
   purchases?: Prisma.PurchaseUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMembersInput = {
@@ -1540,6 +1572,7 @@ export type UserUncheckedUpdateWithoutMembersInput = {
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutInvitationsInput = {
@@ -1577,6 +1610,7 @@ export type UserCreateWithoutInvitationsInput = {
   purchases?: Prisma.PurchaseCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutInvitationsInput = {
@@ -1614,6 +1648,7 @@ export type UserUncheckedCreateWithoutInvitationsInput = {
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutInvitationsInput = {
@@ -1667,6 +1702,7 @@ export type UserUpdateWithoutInvitationsInput = {
   purchases?: Prisma.PurchaseUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInvitationsInput = {
@@ -1704,6 +1740,7 @@ export type UserUncheckedUpdateWithoutInvitationsInput = {
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreditHistoryInput = {
@@ -1741,6 +1778,7 @@ export type UserCreateWithoutCreditHistoryInput = {
   purchases?: Prisma.PurchaseCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreditHistoryInput = {
@@ -1778,6 +1816,7 @@ export type UserUncheckedCreateWithoutCreditHistoryInput = {
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreditHistoryInput = {
@@ -1831,6 +1870,7 @@ export type UserUpdateWithoutCreditHistoryInput = {
   purchases?: Prisma.PurchaseUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreditHistoryInput = {
@@ -1868,6 +1908,7 @@ export type UserUncheckedUpdateWithoutCreditHistoryInput = {
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPurchasesInput = {
@@ -1905,6 +1946,7 @@ export type UserCreateWithoutPurchasesInput = {
   creditHistory?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPurchasesInput = {
@@ -1942,6 +1984,7 @@ export type UserUncheckedCreateWithoutPurchasesInput = {
   creditHistory?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPurchasesInput = {
@@ -1995,6 +2038,7 @@ export type UserUpdateWithoutPurchasesInput = {
   creditHistory?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPurchasesInput = {
@@ -2032,6 +2076,7 @@ export type UserUncheckedUpdateWithoutPurchasesInput = {
   creditHistory?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProjectsInput = {
@@ -2069,6 +2114,7 @@ export type UserCreateWithoutProjectsInput = {
   purchases?: Prisma.PurchaseCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProjectsInput = {
@@ -2106,6 +2152,7 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProjectsInput = {
@@ -2159,6 +2206,7 @@ export type UserUpdateWithoutProjectsInput = {
   purchases?: Prisma.PurchaseUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProjectsInput = {
@@ -2196,6 +2244,7 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAssetsInput = {
@@ -2233,6 +2282,7 @@ export type UserCreateWithoutAssetsInput = {
   purchases?: Prisma.PurchaseCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAssetsInput = {
@@ -2270,6 +2320,7 @@ export type UserUncheckedCreateWithoutAssetsInput = {
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAssetsInput = {
@@ -2323,6 +2374,7 @@ export type UserUpdateWithoutAssetsInput = {
   purchases?: Prisma.PurchaseUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssetsInput = {
@@ -2360,6 +2412,7 @@ export type UserUncheckedUpdateWithoutAssetsInput = {
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutKanbanColumnsInput = {
@@ -2397,6 +2450,7 @@ export type UserCreateWithoutKanbanColumnsInput = {
   creditHistory?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
   purchases?: Prisma.PurchaseCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutKanbanColumnsInput = {
@@ -2434,6 +2488,7 @@ export type UserUncheckedCreateWithoutKanbanColumnsInput = {
   creditHistory?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutKanbanColumnsInput = {
@@ -2487,6 +2542,7 @@ export type UserUpdateWithoutKanbanColumnsInput = {
   creditHistory?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
   purchases?: Prisma.PurchaseUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutKanbanColumnsInput = {
@@ -2524,6 +2580,7 @@ export type UserUncheckedUpdateWithoutKanbanColumnsInput = {
   creditHistory?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTasksInput = {
@@ -2561,6 +2618,7 @@ export type UserCreateWithoutTasksInput = {
   creditHistory?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
   purchases?: Prisma.PurchaseCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTasksInput = {
@@ -2598,6 +2656,7 @@ export type UserUncheckedCreateWithoutTasksInput = {
   creditHistory?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutUserInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedCreateNestedManyWithoutUserInput
+  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTasksInput = {
@@ -2651,6 +2710,7 @@ export type UserUpdateWithoutTasksInput = {
   creditHistory?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
   purchases?: Prisma.PurchaseUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTasksInput = {
@@ -2688,6 +2748,175 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   creditHistory?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutUserNestedInput
   kanbanColumns?: Prisma.KanbanColumnUncheckedUpdateManyWithoutUserNestedInput
+  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutCalendarEventsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  theme?: string | null
+  language?: string | null
+  banned?: boolean
+  role?: string
+  plan?: $Enums.PlanType
+  planStatus?: $Enums.PlanStatus
+  credits?: number
+  lifetimeCredits?: number
+  subscriptionProvider?: $Enums.SubscriptionProvider | null
+  subscriptionId?: string | null
+  subscriptionStatus?: string | null
+  currentPeriodStart?: Date | string | null
+  currentPeriodEnd?: Date | string | null
+  cancelAtPeriodEnd?: boolean
+  stripeCustomerId?: string | null
+  stripePriceId?: string | null
+  lemonSqueezyCustomerId?: string | null
+  lemonSqueezyVariantId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  members?: Prisma.MemberCreateNestedManyWithoutUserInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutUserInput
+  projects?: Prisma.BrandProjectCreateNestedManyWithoutUserInput
+  assets?: Prisma.BrandAssetCreateNestedManyWithoutUserInput
+  creditHistory?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  kanbanColumns?: Prisma.KanbanColumnCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCalendarEventsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  theme?: string | null
+  language?: string | null
+  banned?: boolean
+  role?: string
+  plan?: $Enums.PlanType
+  planStatus?: $Enums.PlanStatus
+  credits?: number
+  lifetimeCredits?: number
+  subscriptionProvider?: $Enums.SubscriptionProvider | null
+  subscriptionId?: string | null
+  subscriptionStatus?: string | null
+  currentPeriodStart?: Date | string | null
+  currentPeriodEnd?: Date | string | null
+  cancelAtPeriodEnd?: boolean
+  stripeCustomerId?: string | null
+  stripePriceId?: string | null
+  lemonSqueezyCustomerId?: string | null
+  lemonSqueezyVariantId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutUserInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.BrandProjectUncheckedCreateNestedManyWithoutUserInput
+  assets?: Prisma.BrandAssetUncheckedCreateNestedManyWithoutUserInput
+  creditHistory?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  kanbanColumns?: Prisma.KanbanColumnUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCalendarEventsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCalendarEventsInput, Prisma.UserUncheckedCreateWithoutCalendarEventsInput>
+}
+
+export type UserUpsertWithoutCalendarEventsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCalendarEventsInput, Prisma.UserUncheckedUpdateWithoutCalendarEventsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCalendarEventsInput, Prisma.UserUncheckedCreateWithoutCalendarEventsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCalendarEventsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCalendarEventsInput, Prisma.UserUncheckedUpdateWithoutCalendarEventsInput>
+}
+
+export type UserUpdateWithoutCalendarEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  plan?: Prisma.EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+  planStatus?: Prisma.EnumPlanStatusFieldUpdateOperationsInput | $Enums.PlanStatus
+  credits?: Prisma.IntFieldUpdateOperationsInput | number
+  lifetimeCredits?: Prisma.IntFieldUpdateOperationsInput | number
+  subscriptionProvider?: Prisma.NullableEnumSubscriptionProviderFieldUpdateOperationsInput | $Enums.SubscriptionProvider | null
+  subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPeriodStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lemonSqueezyCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lemonSqueezyVariantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  members?: Prisma.MemberUpdateManyWithoutUserNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutUserNestedInput
+  projects?: Prisma.BrandProjectUpdateManyWithoutUserNestedInput
+  assets?: Prisma.BrandAssetUpdateManyWithoutUserNestedInput
+  creditHistory?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  kanbanColumns?: Prisma.KanbanColumnUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCalendarEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  plan?: Prisma.EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+  planStatus?: Prisma.EnumPlanStatusFieldUpdateOperationsInput | $Enums.PlanStatus
+  credits?: Prisma.IntFieldUpdateOperationsInput | number
+  lifetimeCredits?: Prisma.IntFieldUpdateOperationsInput | number
+  subscriptionProvider?: Prisma.NullableEnumSubscriptionProviderFieldUpdateOperationsInput | $Enums.SubscriptionProvider | null
+  subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPeriodStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lemonSqueezyCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lemonSqueezyVariantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  members?: Prisma.MemberUncheckedUpdateManyWithoutUserNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.BrandProjectUncheckedUpdateManyWithoutUserNestedInput
+  assets?: Prisma.BrandAssetUncheckedUpdateManyWithoutUserNestedInput
+  creditHistory?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  kanbanColumns?: Prisma.KanbanColumnUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -2706,6 +2935,7 @@ export type UserCountOutputType = {
   purchases: number
   tasks: number
   kanbanColumns: number
+  calendarEvents: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2719,6 +2949,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   purchases?: boolean | UserCountOutputTypeCountPurchasesArgs
   tasks?: boolean | UserCountOutputTypeCountTasksArgs
   kanbanColumns?: boolean | UserCountOutputTypeCountKanbanColumnsArgs
+  calendarEvents?: boolean | UserCountOutputTypeCountCalendarEventsArgs
 }
 
 /**
@@ -2801,6 +3032,13 @@ export type UserCountOutputTypeCountKanbanColumnsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.KanbanColumnWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCalendarEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CalendarEventWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2838,6 +3076,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   purchases?: boolean | Prisma.User$purchasesArgs<ExtArgs>
   tasks?: boolean | Prisma.User$tasksArgs<ExtArgs>
   kanbanColumns?: boolean | Prisma.User$kanbanColumnsArgs<ExtArgs>
+  calendarEvents?: boolean | Prisma.User$calendarEventsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2937,6 +3176,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   purchases?: boolean | Prisma.User$purchasesArgs<ExtArgs>
   tasks?: boolean | Prisma.User$tasksArgs<ExtArgs>
   kanbanColumns?: boolean | Prisma.User$kanbanColumnsArgs<ExtArgs>
+  calendarEvents?: boolean | Prisma.User$calendarEventsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2955,6 +3195,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     purchases: Prisma.$PurchasePayload<ExtArgs>[]
     tasks: Prisma.$TaskPayload<ExtArgs>[]
     kanbanColumns: Prisma.$KanbanColumnPayload<ExtArgs>[]
+    calendarEvents: Prisma.$CalendarEventPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3386,6 +3627,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   purchases<T extends Prisma.User$purchasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$purchasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.User$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   kanbanColumns<T extends Prisma.User$kanbanColumnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$kanbanColumnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$KanbanColumnPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  calendarEvents<T extends Prisma.User$calendarEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$calendarEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CalendarEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4065,6 +4307,30 @@ export type User$kanbanColumnsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.KanbanColumnScalarFieldEnum | Prisma.KanbanColumnScalarFieldEnum[]
+}
+
+/**
+ * User.calendarEvents
+ */
+export type User$calendarEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CalendarEvent
+   */
+  select?: Prisma.CalendarEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CalendarEvent
+   */
+  omit?: Prisma.CalendarEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CalendarEventInclude<ExtArgs> | null
+  where?: Prisma.CalendarEventWhereInput
+  orderBy?: Prisma.CalendarEventOrderByWithRelationInput | Prisma.CalendarEventOrderByWithRelationInput[]
+  cursor?: Prisma.CalendarEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CalendarEventScalarFieldEnum | Prisma.CalendarEventScalarFieldEnum[]
 }
 
 /**
