@@ -12,12 +12,12 @@ const Hero = () => {
   return (
     <section className="relative min-h-[110vh] flex items-center justify-center px-4 md:px-6 overflow-hidden bg-background">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[600px] bg-primary/10 blur-[120px] rounded-full pointer-events-none mix-blend-multiply dark:mix-blend-screen" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-400/5 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-fuchsia-400/5 blur-[100px] rounded-full pointer-events-none" />
 
       <div className="container max-w-7xl mx-auto w-full relative z-10">
-        <div className="flex flex-col items-center space-y-16 py-24 w-full">
-          <div className="flex flex-col items-center text-center space-y-8 max-w-4xl w-full px-2">
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-border shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
+        <div className="flex flex-col items-center space-y-4 py-16 w-full">
+          <div className="flex flex-col items-center text-center space-y-4 max-w-4xl w-full px-2">
+            <div className="inline-flex items-center gap-2.5 px-4 mt-10 py-1.5 rounded-full bg-white dark:bg-white/5 border border-border shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
@@ -30,10 +30,10 @@ const Hero = () => {
             <div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100 fill-mode-backwards">
               <h1 className="text-5xl sm:text-7xl md:text-6xl font-bold tracking-tighter text-foreground leading-[1.1] md:leading-[1.05]">
                 {t("heading.part1")}{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-br from-primary to-blue-600 relative inline-block">
+                <span className="text-transparent pr-1 bg-clip-text bg-linear-to-br from-blue-600 to-fuchsia-600 relative inline-block overflow-visible">
                   {t("heading.highlight")}
                   <svg
-                    className="absolute w-full h-3 -bottom-1 left-0 text-primary opacity-30"
+                    className="absolute w-full h-3 -bottom-3 left-0 text-primary opacity-30"
                     viewBox="0 0 100 10"
                     preserveAspectRatio="none"
                   >
@@ -80,7 +80,7 @@ const Hero = () => {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-primary/20 blur-[100px] rounded-full pointer-events-none" />
 
             <div
-              className="relative mx-auto max-w-6xl aspect-[16/9] md:aspect-[21/10] rounded-[2.5rem] border border-white/60 dark:border-white/10 bg-white/40 dark:bg-black/40 backdrop-blur-2xl shadow-2xl overflow-hidden
+              className="relative mx-auto max-w-6xl aspect-video md:aspect-21/10 rounded-[2.5rem] border border-white/60 dark:border-white/10 bg-white/40 dark:bg-black/40 backdrop-blur-2xl shadow-2xl overflow-hidden
               transform transition-transform duration-700 hover:scale-[1.005] hover:-translate-y-1"
               style={{
                 transform: "rotateX(12deg) scale(0.95)",
@@ -96,10 +96,10 @@ const Hero = () => {
                 <div className="h-1.5 w-32 rounded-full bg-border/50" />
               </div>
 
-              <div className="absolute inset-0 pt-14 flex flex-col bg-gradient-to-b from-white/0 to-white/40 dark:to-black/40">
+              <div className="absolute inset-0 pt-14 flex flex-col bg-linear-to-b from-white/0 to-white/40 dark:to-black/40">
                 <div className="flex-1 flex items-center justify-center p-10">
                   <div className="text-center space-y-6">
-                    <div className="w-24 h-24 mx-auto bg-gradient-to-tr from-primary to-blue-400 rounded-3xl flex items-center justify-center text-white shadow-xl shadow-primary/30 rotate-12">
+                    <div className="w-24 h-24 mx-auto bg-linear-to-tr from-primary to-blue-400 rounded-3xl flex items-center justify-center text-white shadow-xl shadow-primary/30 rotate-12">
                       <StarIcon className="w-12 h-12" />
                     </div>
                     <div className="space-y-2">
@@ -127,11 +127,11 @@ const Hero = () => {
                 </div>
               </div>
 
-              <div className="absolute inset-0 bg-gradient-to-tr from-white/20 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-tr from-white/20 via-transparent to-transparent pointer-events-none" />
             </div>
 
             <div
-              className="absolute -right-2 md:-right-8 top-20 w-48 h-72 rounded-[1.5rem] bg-gradient-to-bl from-neutral-900 to-neutral-800 dark:from-white dark:to-neutral-200 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.3)] hidden lg:flex flex-col justify-between p-5 animate-bounce-slow"
+              className="absolute -right-2 md:-right-8 top-20 w-48 h-72 rounded-3xl bg-linear-to-bl from-neutral-900 to-neutral-800 dark:from-white dark:to-neutral-200 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.3)] hidden lg:flex flex-col justify-between p-5 animate-bounce-slow"
               style={{ animationDuration: "6s" }}
             >
               <div className="flex justify-between items-start">

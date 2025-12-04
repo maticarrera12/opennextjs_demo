@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft02Icon, Logout01Icon, ArrowDown01Icon } from "hugeicons-react";
+import { ArrowLeft02Icon, Logout01Icon } from "hugeicons-react";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
@@ -13,21 +13,17 @@ import { useSidebar } from "@/contexts/sidebar-context";
 import { useLocaleRouting } from "@/hooks/useLocaleRouting";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
-
 export interface SidebarItem {
   name: string;
-  href?: string;
+  href: string;
   icon: any;
   localeAware?: boolean;
   matchPrefixes?: string[];
-  items?: SidebarItem[];
 }
-
 export interface SidebarSection {
   label: string;
   items: SidebarItem[];
 }
-
 interface AppSidebarProps {
   title: string;
   sections: SidebarSection[];
@@ -35,126 +31,6 @@ interface AppSidebarProps {
   topContent?: React.ReactNode;
   topContentHeightClass?: string;
 }
-
-const SidebarMenuItem = ({
-  item,
-  pathname,
-  setIsOpen,
-  animateState,
-  contentVariants,
-  isMobile,
-}: {
-  item: SidebarItem;
-  pathname: string;
-  setIsOpen: (isOpen: boolean) => void;
-  animateState: any;
-  contentVariants: any;
-  isMobile: boolean;
-}) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const Icon = item.icon;
-
-  // Check if this item or any of its children are active
-  const isChildActive = (item: SidebarItem): boolean => {
-    if (
-      item.href &&
-      (pathname === item.href || item.matchPrefixes?.some((p) => pathname.startsWith(p)))
-    ) {
-      return true;
-    }
-    if (item.items) {
-      return item.items.some((child) => isChildActive(child));
-    }
-    return false;
-  };
-
-  const isActive = isChildActive(item);
-
-  useEffect(() => {
-    if (isActive) {
-      setIsExpanded(true);
-    }
-  }, [isActive]);
-
-  const hasChildren = item.items && item.items.length > 0;
-
-  if (hasChildren) {
-    return (
-      <div className="flex flex-col gap-1">
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className={cn(
-            "group relative flex w-full items-center gap-3 px-2 py-2 rounded-lg transition-all duration-200",
-            !isActive && "hover:bg-muted/50",
-            isActive && "bg-muted/50 text-foreground font-medium"
-          )}
-        >
-          <div className="shrink-0 w-6 h-6 flex items-center justify-center">
-            <Icon size={20} />
-          </div>
-          <motion.span
-            variants={!isMobile ? contentVariants : undefined}
-            animate={animateState}
-            className="whitespace-nowrap text-sm flex-1 text-left flex items-center justify-between"
-          >
-            {item.name}
-            <ArrowDown01Icon
-              size={16}
-              className={cn("transition-transform duration-200", isExpanded && "rotate-180")}
-            />
-          </motion.span>
-        </button>
-        <AnimatePresence>
-          {isExpanded && animateState !== "collapsed" && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden"
-            >
-              <div className="flex flex-col gap-1 pl-4 border-l ml-5">
-                {item.items!.map((subItem) => (
-                  <SidebarMenuItem
-                    key={subItem.name}
-                    item={subItem}
-                    pathname={pathname}
-                    setIsOpen={setIsOpen}
-                    animateState={animateState}
-                    contentVariants={contentVariants}
-                    isMobile={isMobile}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    );
-  }
-
-  return (
-    <Link
-      href={item.href || "#"}
-      onClick={() => setIsOpen(false)}
-      className={cn(
-        "group relative flex items-center gap-3 px-2 py-2 rounded-lg transition-all duration-200",
-        !isActive && "hover:bg-muted/50",
-        isActive && "bg-primary text-primary-foreground"
-      )}
-    >
-      <div className="shrink-0 w-6 h-6 flex items-center justify-center">
-        <Icon size={20} />
-      </div>
-      <motion.span
-        variants={!isMobile ? contentVariants : undefined}
-        animate={animateState}
-        className="whitespace-nowrap text-sm"
-      >
-        {item.name}
-      </motion.span>
-    </Link>
-  );
-};
 
 export default function AppSidebar({
   title,
@@ -186,7 +62,6 @@ export default function AppSidebar({
     router.refresh();
   };
 
-  // ... (Tu lógica de mouseLeave y variantes se mantiene igual) ...
   const handleMouseLeave = (e: React.MouseEvent) => {
     if (isMobile) return;
     if (isLocked) return;
@@ -233,15 +108,13 @@ export default function AppSidebar({
 
   return (
     <>
-      {/* --- 1. BOTÓN FLOTANTE ANIMADO (BURGHER/CRUZ) --- */}
-      {/* Lo renderizamos solo en mobile. position fixed para que flote sobre todo */}
       {isMobile && (
         <Button
           onClick={() => setIsOpen(!isOpen)}
-          className="fixed top-4 left-4 z-50 group size-10 md:hidden hover:bg-muted/50 rounded-full"
+          className="fixed top-4 left-4 z-60 group size-10 md:hidden hover:bg-muted/50 rounded-full bg-background/95 backdrop-blur-sm border border-border/60 shadow-lg"
           variant="ghost"
           size="icon"
-          aria-expanded={isOpen} // Esto activa la animación del SVG
+          aria-expanded={isOpen}
         >
           <svg
             className="pointer-events-none stroke-foreground"
@@ -277,12 +150,23 @@ export default function AppSidebar({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
-            className="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
           />
         )}
       </AnimatePresence>
 
-      {/* --- 3. SIDEBAR --- */}
+      {/* --- 3. SIDEBAR WRAPPER (mantiene espacio en layout solo en desktop) --- */}
+      {!isMobile && (
+        <motion.div
+          initial={false}
+          animate={sidebarAnimate}
+          variants={sidebarVariants}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          className="shrink-0 relative"
+        />
+      )}
+
+      {/* --- 4. SIDEBAR --- */}
       <motion.aside
         onMouseEnter={() => !isMobile && setIsHovered(true)}
         onMouseLeave={handleMouseLeave}
@@ -291,14 +175,15 @@ export default function AppSidebar({
         variants={!isMobile ? sidebarVariants : undefined}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className={cn(
-          "z-40 h-screen shrink-0 fixed left-0 top-0 md:sticky md:top-0 border-r",
-          "bg-background/95 backdrop-blur-xl border-border/60 shadow-2xl md:shadow-none",
+          "z-50 shrink-0",
+          "bg-card backdrop-blur-xl  shadow-2xl md:shadow-none",
+          "fixed left-0 top-0 h-screen",
+          "md:fixed md:left-0 md:top-0 md:h-screen md:z-40",
           isMobile ? "block" : "flex flex-col",
           !isOpen && !isHovered && !isLocked ? "-translate-x-full md:translate-x-0" : ""
         )}
       >
         <div className="flex h-full flex-col py-4 w-full">
-          {/* Ajuste de padding top en mobile para que el contenido no quede debajo del botón fixed */}
           <div className={cn("px-3 mb-4", isMobile && "mt-12")}>
             {(isMobile && isOpen) || !isMobile ? (
               <Link
@@ -327,8 +212,6 @@ export default function AppSidebar({
           <div className="flex-1 overflow-y-auto px-2 scrollbar-hide space-y-6">
             {sections.map((section) => (
               <div key={section.label}>
-                {/* ... (El resto del contenido sigue igual) ... */}
-                {/* Copia aquí el contenido de tus secciones */}
                 <div className="px-3 mb-2 h-5 flex items-center">
                   <motion.span
                     variants={!isMobile ? labelVariants : undefined}
@@ -341,17 +224,36 @@ export default function AppSidebar({
                   </motion.span>
                 </div>
                 <nav className="flex flex-col gap-0.5">
-                  {section.items.map((item) => (
-                    <SidebarMenuItem
-                      key={item.name}
-                      item={item}
-                      pathname={pathname}
-                      setIsOpen={setIsOpen}
-                      animateState={animateState}
-                      contentVariants={contentVariants}
-                      isMobile={isMobile}
-                    />
-                  ))}
+                  {section.items.map((item) => {
+                    const Icon = item.icon;
+                    const isActive =
+                      pathname === item.href ||
+                      (item.matchPrefixes &&
+                        item.matchPrefixes.some((prefix) => pathname.startsWith(prefix)));
+                    return (
+                      <Link
+                        href={item.href}
+                        key={item.name}
+                        onClick={() => setIsOpen(false)}
+                        className={cn(
+                          "group relative flex items-center gap-3 px-2 py-2 rounded-lg transition-all duration-200",
+                          !isActive && "hover:bg-muted/50",
+                          isActive && "bg-primary text-primary-foreground"
+                        )}
+                      >
+                        <div className="shrink-0 w-6 h-6 flex items-center justify-center">
+                          <Icon size={20} />
+                        </div>
+                        <motion.span
+                          variants={!isMobile ? contentVariants : undefined}
+                          animate={animateState}
+                          className="whitespace-nowrap text-sm"
+                        >
+                          {item.name}
+                        </motion.span>
+                      </Link>
+                    );
+                  })}
                 </nav>
               </div>
             ))}
