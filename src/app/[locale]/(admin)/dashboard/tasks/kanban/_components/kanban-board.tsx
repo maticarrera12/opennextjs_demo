@@ -165,8 +165,8 @@ export default function KanbanBoard({ initialTasks, initialColumns }: KanbanBoar
 
     if (!over) return;
 
-    const activeId = active.id as string;
-    const overId = over.id;
+    const activeId = String(active.id);
+    const overId = String(over.id);
 
     if (activeId === overId) return;
 
