@@ -69,6 +69,7 @@ model User {
   purchases     Purchase[]
   tasks         Task[]
   kanbanColumns KanbanColumn[]
+  calendarEvents CalendarEvent[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
@@ -475,4 +476,26 @@ model Task {
   @@index([userId])
   @@index([status])
   @@index([columnId])
+}
+
+// ============================================
+// CALENDAR
+// ============================================
+
+model CalendarEvent {
+  id          String   @id @default(cuid())
+  title       String
+  start       DateTime
+  end         DateTime?
+  allDay      Boolean  @default(false)
+  level       String?  // danger, success, primary, warning
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+  @@index([start])
 }

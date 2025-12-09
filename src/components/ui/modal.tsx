@@ -34,14 +34,14 @@ export function Modal({ isOpen, onClose, children, className }: ModalProps) {
       {/* Modal Content */}
       <div
         className={cn(
-          "relative bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto",
+          "relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto",
           className
         )}
       >
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition"
         >
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
