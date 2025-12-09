@@ -23,9 +23,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.text();

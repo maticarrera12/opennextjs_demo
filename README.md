@@ -1,6 +1,6 @@
 # OpenNext Boilerplate
 
-A modern, production-ready Next.js 15 boilerplate with authentication, internationalization, payments, and a beautiful UI out of the box.
+A modern, production-ready Next.js 16 boilerplate with authentication, internationalization, payments, and a beautiful UI out of the box.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?style=flat-square&logo=typescript)
