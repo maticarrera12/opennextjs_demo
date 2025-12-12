@@ -15,9 +15,12 @@ export default function LogoMarquee() {
   const duplicatedLogos = [...logos, ...logos, ...logos, ...logos];
 
   return (
-    <div className="relative flex w-full overflow-hidden py-10 bg-background">
-      <div className="pointer-events-none absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-background to-transparent z-10" />
-      <div className="pointer-events-none absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-background to-transparent z-10" />
+    <div
+      className="relative flex w-full overflow-hidden py-10 bg-transparent"
+      style={{ backgroundColor: "transparent" }}
+    >
+      <div className="pointer-events-none absolute left-0 top-0 h-full w-20 z-10" />
+      <div className="pointer-events-none absolute right-0 top-0 h-full w-20 z-10" />
 
       <motion.div
         className="flex gap-16"
@@ -29,7 +32,7 @@ export default function LogoMarquee() {
         }}
       >
         {duplicatedLogos.map((logo, i) => (
-          <div key={i} className="relative flex-shrink-0 opacity-70 hover:opacity-100 transition">
+          <div key={i} className="relative shrink-0 opacity-70 hover:opacity-100 transition">
             <Image
               src={logo}
               alt={`logo-${i}`}

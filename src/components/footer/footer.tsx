@@ -12,7 +12,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-background border-t border-border">
+    <footer className="w-full bg-transparent border-t border-border">
       <div className="mx-auto max-w-7xl px-6 pt-16 pb-8">
         {/* TOP SECTION: Brand & CTA */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-16">

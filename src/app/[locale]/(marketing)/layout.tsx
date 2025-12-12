@@ -1,13 +1,15 @@
 import React from "react";
 
+import MarketingBackground from "./_components/marketing-background";
 import Footer from "@/components/footer/footer";
 import Navbar from "@/components/navbar/comp-582";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
+      <MarketingBackground />
       <Navbar />
-      <div>{children}</div>
+      <div className="relative z-10">{children}</div>
       <Footer />
     </>
   );

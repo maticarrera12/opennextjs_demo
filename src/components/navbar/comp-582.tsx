@@ -5,6 +5,7 @@ import { Home12Icon, SaleTag01Icon } from "hugeicons-react";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
+import { BorderBeam } from "../ui/border-beam";
 import { LanguageSwitcher } from "@/components/navbar/languaje-switcher";
 import ThemeToggle from "@/components/navbar/theme-toggle";
 import UserMenu from "@/components/navbar/user-menu";
@@ -204,9 +205,9 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="hidden md:block">
+              {/* <div className="hidden md:block">
                 <ThemeToggle />
-              </div>
+              </div> */}
               <div className="hidden md:block">
                 <LanguageSwitcher />
               </div>
@@ -214,9 +215,17 @@ export default function Navbar() {
               <Button
                 onClick={() => push("/waitlist")}
                 variant="outline"
-                className="text-sm cursor-pointer rounded-full bg-transparent border-2 text-foreground hover:bg-muted hidden sm:flex"
+                className="relative text-sm cursor-pointer rounded-full bg-transparent border-2 text-foreground hover:bg-muted hidden sm:flex overflow-hidden"
               >
-                Waitlist
+                <span className="relative z-10">Waitlist</span>
+
+                <BorderBeam
+                  duration={6}
+                  delay={3}
+                  size={100}
+                  borderWidth={2}
+                  className="from-transparent via-purple-500 to-transparent"
+                />
               </Button>
 
               {!isLoading &&

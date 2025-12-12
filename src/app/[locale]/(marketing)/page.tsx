@@ -28,7 +28,7 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="w-full bg-background">
+    <div className="w-full">
       <Hero />
       <LogoMarquee />
       <BentoShowcase />

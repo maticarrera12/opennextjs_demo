@@ -4,20 +4,16 @@ import { ArrowRight02Icon, StarIcon, CreditCardIcon, ChartAverageIcon } from "hu
 import { useTranslations } from "next-intl";
 
 import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
-import { Link } from "@/i18n/routing";
 
 const Hero = () => {
   const t = useTranslations("hero");
 
   return (
-    <section className="relative min-h-[110vh] flex items-center justify-center px-4 md:px-6 overflow-hidden bg-background">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[600px] bg-primary/10 blur-[120px] rounded-full pointer-events-none mix-blend-multiply dark:mix-blend-screen" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-fuchsia-400/5 blur-[100px] rounded-full pointer-events-none" />
-
+    <section className="relative min-h-[110vh] flex items-center justify-center px-4 md:px-6 overflow-hidden">
       <div className="container max-w-7xl mx-auto w-full relative z-10">
         <div className="flex flex-col items-center space-y-4 py-16 w-full">
           <div className="flex flex-col items-center text-center space-y-4 max-w-4xl w-full px-2">
-            <div className="inline-flex items-center gap-2.5 px-4 mt-10 py-1.5 rounded-full bg-white dark:bg-white/5 border border-border shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
+            <div className="inline-flex items-center gap-2.5 px-4 mt-10 py-1.5 rounded-full border border-border shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
@@ -66,19 +62,17 @@ const Hero = () => {
                 />
               </div>
 
-              <Link
-                href="/docs"
-                className="group flex items-center gap-2 h-14 px-8 rounded-full border border-border/60 bg-white/50 dark:bg-white/5 hover:bg-muted text-foreground transition-all duration-300 hover:scale-105"
-              >
-                <span className="font-medium">Documentation</span>
-                <ArrowRight02Icon className="w-5 h-5 text-primary transition-transform group-hover:translate-x-1" />
-              </Link>
+              {/* <Link
+                  href="/docs"
+                  className="group flex items-center gap-2 h-14 px-8 rounded-full border border-border/60 bg-white/50 dark:bg-white/5 hover:bg-muted text-foreground transition-all duration-300 hover:scale-105"
+                >
+                  <span className="font-medium">Documentation</span>
+                  <ArrowRight02Icon className="w-5 h-5 text-primary transition-transform group-hover:translate-x-1" />
+                </Link> */}
             </div>
           </div>
 
           <div className="relative w-full mt-4 perspective-2000 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500 fill-mode-backwards">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-primary/20 blur-[100px] rounded-full pointer-events-none" />
-
             <div
               className="relative mx-auto max-w-6xl aspect-video md:aspect-21/10 rounded-[2.5rem] border border-white/60 dark:border-white/10 bg-white/40 dark:bg-black/40 backdrop-blur-2xl shadow-2xl overflow-hidden
               transform transition-transform duration-700 hover:scale-[1.005] hover:-translate-y-1"

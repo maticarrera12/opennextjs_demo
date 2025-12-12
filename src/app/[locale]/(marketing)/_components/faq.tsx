@@ -36,7 +36,7 @@ const Faq = () => {
   ];
 
   return (
-    <section className="w-full py-12 bg-background">
+    <section className="w-full py-12 bg-transparent">
       <div className="container max-w-3xl mx-auto px-4">
         <div className="text-center mb-16 space-y-4 my-4">
           <div className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-muted border border-border mb-4">
