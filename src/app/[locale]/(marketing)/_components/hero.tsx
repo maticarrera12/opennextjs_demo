@@ -74,7 +74,7 @@ const Hero = () => {
 
           <div className="relative w-full mt-4 perspective-2000 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500 fill-mode-backwards">
             <div
-              className="relative mx-auto max-w-6xl aspect-video md:aspect-21/10 rounded-[2.5rem] border border-white/60 dark:border-white/10 bg-white/40 dark:bg-black/40 backdrop-blur-2xl shadow-2xl overflow-hidden
+              className="relative mx-auto max-w-6xl aspect-video md:aspect-21/10 rounded-[2.5rem] border border-white/60 dark:border-white/10 bg-white/15 dark:bg-black/15 backdrop-blur-2xl shadow-2xl overflow-hidden
               transform transition-transform duration-700 hover:scale-[1.005] hover:-translate-y-1"
               style={{
                 transform: "rotateX(12deg) scale(0.95)",
